@@ -2,6 +2,8 @@
 using Reign.Core;
 using Reign.Video;
 using Reign.Video.API;
+using Reign.Input;
+using Reign.Input.API;
 using ShaderMaterials.Shaders;
 
 namespace Demo
@@ -25,6 +27,10 @@ namespace Demo
 		SamplerStateI samplerState;
 		BlendStateI blendState;
 		DepthStencilStateI depthStencilState;
+
+		InputI input;
+		MouseI mouse;
+		KeyboardI keyboard;
 		
 		public MainApp()
 		#if WINDOWS
@@ -67,6 +73,16 @@ namespace Demo
 				blendState.Enable();
 				depthStencilState.Enable();
 
+				InputTypes inputType;
+				#if METRO
+				InputTypes createInputTypes = InputTypes.Metro;
+				#else
+				InputTypes createInputTypes = InputTypes.WinForms;
+				#endif
+				input = Input.Create(createInputTypes, out inputType, root, this);
+				mouse = Mouse.Create(inputType, input);
+				keyboard = Keyboard.Create(inputType, input);
+
 				loaded = true;
 			}
 			catch (Exception e)
@@ -90,7 +106,6 @@ namespace Demo
 			dispose();
 		}
 
-		float rot;
 		protected override void render()
 		{
 			if (!loaded) return;
@@ -102,13 +117,16 @@ namespace Demo
 			}
 			if (Streams.ItemsRemainingToLoad != 0) return;
 
+			input.Update();
 			video.Update();
 			video.EnableRenderTarget();
-			video.Clear(0, (float)System.Math.Abs(System.Math.Sin(rot)) * .5f, 0, 1);
-			rot += .1f;
-
+			video.Clear(0, .3f, .3f, 1);
+			System.Diagnostics.Debug.WriteLine(mouse.Location);
 			viewPort.Apply();
-			camera.RotateAroundLookLocationWorld(0, .01f, 0);
+			if (!mouse.Left.On) camera.RotateAroundLookLocationWorld(0, .01f, 0);
+			else camera.RotateAroundLookLocation(-mouse.Velocity.Y * .05f, -mouse.Velocity.X * .05f, 0);
+			if (keyboard.ArrowUp.On) camera.Zoom(.05f, 1);
+			if (keyboard.ArrowDown.On) camera.Zoom(-.05f, 1);
 			camera.Apply();
 
 			QuickDraw3ColorUVMaterial.Camera = camera.TransformMatrix;

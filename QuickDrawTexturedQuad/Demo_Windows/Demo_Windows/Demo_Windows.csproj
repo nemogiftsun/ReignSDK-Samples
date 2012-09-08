@@ -37,6 +37,15 @@
     <Reference Include="Reign.Core">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Reign.Input">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Input.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.WinForms">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Input.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Reign.Video">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Video.dll</HintPath>
     </Reference>

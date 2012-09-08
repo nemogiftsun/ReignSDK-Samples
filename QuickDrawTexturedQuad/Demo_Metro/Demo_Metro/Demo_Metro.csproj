@@ -139,6 +139,15 @@
     <Reference Include="Reign.Core">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Reign.Input">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.Metro">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="Reign.Video">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Video.dll</HintPath>
     </Reference>
