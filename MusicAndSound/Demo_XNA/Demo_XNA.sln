@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_XNA", "Demo_XNA\Demo_XNA\Demo_XNA.csproj", "{A1CE9B7D-2E3D-4435-96FC-8BC6E4EB93E3}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Demo_XNAContent", "Demo_XNA\Demo_XNAContent\Demo_XNAContent.contentproj", "{CDD13E11-ED22-4EB9-9345-AE6BD159F079}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1CE9B7D-2E3D-4435-96FC-8BC6E4EB93E3}.Debug|x86.ActiveCfg = Debug|x86
+		{A1CE9B7D-2E3D-4435-96FC-8BC6E4EB93E3}.Debug|x86.Build.0 = Debug|x86
+		{A1CE9B7D-2E3D-4435-96FC-8BC6E4EB93E3}.Release|x86.ActiveCfg = Release|x86
+		{A1CE9B7D-2E3D-4435-96FC-8BC6E4EB93E3}.Release|x86.Build.0 = Release|x86
+		{CDD13E11-ED22-4EB9-9345-AE6BD159F079}.Debug|x86.ActiveCfg = Debug|x86
+		{CDD13E11-ED22-4EB9-9345-AE6BD159F079}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

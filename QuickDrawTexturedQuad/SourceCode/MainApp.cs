@@ -10,7 +10,7 @@ namespace Demo
 {
 	#if WINDOWS
 	class MainApp : Window
-	#elif METRO
+	#elif METRO || XNA
 	class MainApp : Application
 	#endif
 	{
@@ -29,14 +29,20 @@ namespace Demo
 		DepthStencilStateI depthStencilState;
 
 		InputI input;
+		#if WINDOWS || METRO
 		MouseI mouse;
 		KeyboardI keyboard;
+		#elif XNA
+		GamePadI gamePad;
+		#endif
 		
 		public MainApp()
 		#if WINDOWS
 		: base("QuickDraw Sample", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
+		#elif XNA
+		: base(512, 512)
 		#endif
 		{
 			
@@ -47,13 +53,22 @@ namespace Demo
 			try
 			{
 				root = new RootDisposable();
+
+				// video objects
 				VideoTypes videoType;
 				#if METRO
 				VideoTypes createVideoTypes = VideoTypes.D3D11;
-				#else
+				#elif WINDOWS
 				VideoTypes createVideoTypes = VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL;
+				#elif XNA
+				VideoTypes createVideoTypes = VideoTypes.XNA;
 				#endif
+
+				#if WINDOWS || METRO
 				video = Video.Create(createVideoTypes, out videoType, root, this, true);
+				#elif XNA
+				video = Video.Create(createVideoTypes, out videoType, root, this);
+				#endif
 
 				QuickDraw3ColorUVMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
 				material = new QuickDraw3ColorUVMaterial();
@@ -64,24 +79,28 @@ namespace Demo
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
 				camera = new Camera(viewPort, new Vector3(0, 0, 5), new Vector3(), new Vector3(0, 0+1, 5));
 
+				// states
 				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullNone));
 				samplerState = SamplerState.Create(videoType, video, SamplerStateDesc.Create(videoType, SamplerStateTypes.Linear_Wrap));
 				blendState = BlendState.Create(videoType, video, BlendStateDesc.Create(videoType, BlendStateTypes.Alpha));
 				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.None));
-				rasterizerState.Enable();
-				samplerState.Enable(0);
-				blendState.Enable();
-				depthStencilState.Enable();
 
+				// input
 				InputTypes inputType;
 				#if METRO
 				InputTypes createInputTypes = InputTypes.Metro;
-				#else
+				#elif WINDOWS
 				InputTypes createInputTypes = InputTypes.WinForms;
+				#elif XNA
+				InputTypes createInputTypes = InputTypes.XNA;
 				#endif
 				input = Input.Create(createInputTypes, out inputType, root, this);
+				#if WINDOWS || METRO
 				mouse = Mouse.Create(inputType, input);
 				keyboard = Keyboard.Create(inputType, input);
+				#elif XNA
+				gamePad = GamePad.Create(InputTypes.XNA, input, GamePadControllers.All);
+				#endif
 
 				loaded = true;
 			}
@@ -106,6 +125,13 @@ namespace Demo
 			dispose();
 		}
 
+		protected override void update()
+		{
+			#if XNA
+			if (gamePad.Back.Up) Exit();
+			#endif
+		}
+
 		protected override void render()
 		{
 			if (!loaded) return;
@@ -113,20 +139,34 @@ namespace Demo
 			var e = Streams.TryLoad();
 			if (e != null)
 			{
-				throw e;
+				Message.Show("Error", e.Message);
+				dispose();
+				loaded = false;
 			}
 			if (Streams.ItemsRemainingToLoad != 0) return;
 
 			input.Update();
 			video.Update();
 			video.EnableRenderTarget();
+			rasterizerState.Enable();
+			samplerState.Enable(0);
+			blendState.Enable();
+			depthStencilState.Enable();
 			video.Clear(0, .3f, .3f, 1);
-			System.Diagnostics.Debug.WriteLine(mouse.Location);
-			viewPort.Apply();
-			if (!mouse.Left.On) camera.RotateAroundLookLocationWorld(0, .01f, 0);
-			else camera.RotateAroundLookLocation(-mouse.Velocity.Y * .05f, -mouse.Velocity.X * .05f, 0);
+
+			#if WINDOWS || METRO
 			if (keyboard.ArrowUp.On) camera.Zoom(.05f, 1);
 			if (keyboard.ArrowDown.On) camera.Zoom(-.05f, 1);
+			if (!mouse.Left.On) camera.RotateAroundLookLocationWorld(0, .01f, 0);
+			else camera.RotateAroundLookLocation(-mouse.Velocity.Y * .05f, -mouse.Velocity.X * .05f, 0);
+			#elif XNA
+			if (gamePad.A.On) camera.Zoom(.05f, 1);
+			if (gamePad.B.On) camera.Zoom(-.05f, 1);
+			if (gamePad.LeftStick.Length() <= .1f) camera.RotateAroundLookLocationWorld(0, .01f, 0);
+			else camera.RotateAroundLookLocation(-gamePad.LeftStick.Y * .05f, gamePad.LeftStick.X * .05f, 0);
+			#endif
+
+			viewPort.Apply();
 			camera.Apply();
 
 			QuickDraw3ColorUVMaterial.Camera = camera.TransformMatrix;
@@ -134,7 +174,8 @@ namespace Demo
 			material.Enable();
 			material.Apply();
 			qd.StartTriangles();
-			    qd.UV(0, 0); qd.Pos(-1, -1, 0);
+			    qd.Color(1, 1, 1, 1);
+				qd.UV(0, 0); qd.Pos(-1, -1, 0);
 			    qd.UV(0, 1); qd.Pos(-1, 1, 0);
 			    qd.UV(1, 1); qd.Pos(1, 1, 0);
 
@@ -143,7 +184,9 @@ namespace Demo
 			    qd.UV(1, 0); qd.Pos(1, -1, 0);
 			qd.End();
 
+			#if !XNA
 			video.Present();
+			#endif
 		}
 	}
 }

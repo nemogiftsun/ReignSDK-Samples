@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FA0518E8-D919-4EAB-B4EF-E0C2FFAE9AA1}</ProjectGuid>
+    <ProjectGuid>{015982BD-854B-4F6C-8F27-FE4C3A00A252}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo</RootNamespace>
+    <RootNamespace>Demo_Windows</RootNamespace>
     <AssemblyName>Demo_Windows</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -36,15 +36,6 @@
   <ItemGroup>
     <Reference Include="Reign.Core">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Input.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input.API">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Input.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input.WinForms">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Input.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Reign.Video">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Windows\Lib\Reign.Video.dll</HintPath>
@@ -76,8 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw3ColorUV.cs">
-      <Link>Data\QuickDraw3ColorUV.cs</Link>
+    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+      <Link>Data\DiffuseTexture.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
@@ -95,26 +86,38 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="..\..\..\Data\Models\box.dae">
+      <Link>Data\box.dae</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="..\..\..\Data\Images\Roxy.dds">
       <Link>Data\Roxy.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.rs">
-      <Link>Data\D3D11_QuickDraw3ColorUV.rs</Link>
+    <Content Include="..\..\..\Data\Shaders\Compiled\D3D11_DiffuseTexture.rs">
+      <Link>Data\D3D11_DiffuseTexture.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D9_QuickDraw3ColorUV.rs">
-      <Link>Data\D3D9_QuickDraw3ColorUV.rs</Link>
+    <Content Include="..\..\..\Data\Models\cartoon_character.dae">
+      <Link>Data\cartoon_character.dae</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL2_QuickDraw3ColorUV.rs">
-      <Link>Data\GL2_QuickDraw3ColorUV.rs</Link>
+    <Content Include="..\..\..\Data\Shaders\Compiled\D3D9_DiffuseTexture.rs">
+      <Link>Data\D3D9_DiffuseTexture.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL3_QuickDraw3ColorUV.rs">
-      <Link>Data\GL3_QuickDraw3ColorUV.rs</Link>
+    <Content Include="..\..\..\Data\Shaders\Compiled\GL3_DiffuseTexture.rs">
+      <Link>Data\GL3_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Shaders\Compiled\GL2_DiffuseTexture.rs">
+      <Link>Data\GL2_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Images\Wolf.dds">
+      <Link>Data\Wolf.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">

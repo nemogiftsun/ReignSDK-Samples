@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32DCEB58-FC02-405C-953E-3E21F2103F4C}</ProjectGuid>
+    <ProjectGuid>{3D91D369-1023-49C5-86D7-29536D166B94}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Demo</RootNamespace>
@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETFX_CORE METRO</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -100,8 +100,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw3ColorUV.cs">
-      <Link>Data\QuickDraw3ColorUV.cs</Link>
+    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+      <Link>Data\DiffuseTexture.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
@@ -119,12 +119,20 @@
       <Link>Data\Roxy.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.mrs">
-      <Link>Data\D3D11_QuickDraw3ColorUV.mrs</Link>
+    <Content Include="..\..\..\Data\Shaders\Compiled\D3D11_DiffuseTexture.mrs">
+      <Link>Data\D3D11_DiffuseTexture.mrs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.ref">
-      <Link>Data\D3D11_QuickDraw3ColorUV.ref</Link>
+    <Content Include="..\..\..\Data\Shaders\Compiled\D3D11_DiffuseTexture.ref">
+      <Link>Data\D3D11_DiffuseTexture.ref</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Models\box.dae">
+      <Link>Data\box.dae</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Images\Wolf.dds">
+      <Link>Data\Wolf.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Demo_Metro_TemporaryKey.pfx" />
@@ -138,15 +146,6 @@
   <ItemGroup>
     <Reference Include="Reign.Core">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input.API">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input.Metro">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Reign.Video">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Video.dll</HintPath>

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32DCEB58-FC02-405C-953E-3E21F2103F4C}</ProjectGuid>
+    <ProjectGuid>{1E5558E0-7065-4855-9DFA-F897390276EC}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo</RootNamespace>
+    <RootNamespace>Demo_Metro</RootNamespace>
     <AssemblyName>Demo_Metro</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETFX_CORE METRO</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -80,7 +80,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETFX_CORE METRO</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -90,7 +90,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE METRO</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -100,14 +100,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw3ColorUV.cs">
-      <Link>Data\QuickDraw3ColorUV.cs</Link>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\SourceCode\MainApp.cs">
-      <Link>MainApp.cs</Link>
-    </Compile>
-    <Compile Include="..\..\SourceCode\Program.cs">
-      <Link>Program.cs</Link>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -115,50 +112,50 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="..\..\..\Data\Images\Roxy.dds">
-      <Link>Data\Roxy.dds</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.mrs">
-      <Link>Data\D3D11_QuickDraw3ColorUV.mrs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.ref">
-      <Link>Data\D3D11_QuickDraw3ColorUV.ref</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Demo_Metro_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\Data\Sounds\Explo2.wav">
+      <Link>Data\Explo2.wav</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Reign.Audio">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Audio.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Audio.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Audio.Dumby">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Audio.Dumby.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Audio.XAudio">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Audio.XAudio.dll</HintPath>
+    </Reference>
     <Reference Include="Reign.Core">
       <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Reign.Input">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input.API">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Input.Metro">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Input.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Video">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Video.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Video.API">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Video.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign.Video.D3D11">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign.Video.D3D11.dll</HintPath>
-    </Reference>
-    <Reference Include="Reign_Video_D3D11_Component">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign_Video_D3D11_Component.winmd</HintPath>
+    <Reference Include="Reign_Audio_XAudio_Component">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Metro\Lib\Reign_Audio_XAudio_Component.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
