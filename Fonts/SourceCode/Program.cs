@@ -8,7 +8,7 @@ namespace Demo_Windows
 		[STAThread]
 		static void Main()
 		{
-			OS.Run(new MainApp());
+			OS.Run(new MainApp(), UpdateAndRenderModes.Stepping, 60);
 		}
 	}
 }

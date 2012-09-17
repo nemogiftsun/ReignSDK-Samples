@@ -43,7 +43,7 @@ namespace Demo_Windows
 				root = new RootDisposable();
 				VideoTypes videoType;
 				#if WINDOWS
-				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
+				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, false);
 				#elif METRO
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
@@ -98,7 +98,12 @@ namespace Demo_Windows
 			material.Transform = new Matrix4(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Location);
 		}
 
-		protected override void render()
+		protected override void update(Time time)
+		{
+			camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
+		}
+
+		protected override void render(Time time)
 		{
 			if (!loaded) return;
 
@@ -119,7 +124,6 @@ namespace Demo_Windows
 			samplerState.Enable(0);
 
 			viewPort.Apply();
-			camera.RotateAroundLookLocationWorld(0, .01f, 0);
 			camera.Apply();
 
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;

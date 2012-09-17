@@ -12,7 +12,7 @@ namespace Demo_Windows
 		#endif
 		static void Main()
 		{
-			OS.Run(new MainApp());
+			OS.Run(new MainApp(), UpdateAndRenderModes.Stepping, 60);
 		}
 	}
 }
