@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{015982BD-854B-4F6C-8F27-FE4C3A00A252}</ProjectGuid>
+    <ProjectGuid>{88809657-5278-4D38-A9B8-B71B2EE54100}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Demo_Windows</RootNamespace>
@@ -67,8 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
-      <Link>Data\DiffuseTexture.cs</Link>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font.cs">
+      <Link>Font.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
@@ -87,33 +87,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="..\..\..\Data\Models\box.dae">
-      <Link>Data\box.dae</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="..\..\..\Data\Images\Roxy.dds">
-      <Link>Data\Roxy.dds</Link>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_Font.rs">
+      <Link>Data\D3D11_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\D3D11_DiffuseTexture.rs">
-      <Link>Data\D3D11_DiffuseTexture.rs</Link>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D9_Font.rs">
+      <Link>Data\D3D9_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\D3D9_DiffuseTexture.rs">
-      <Link>Data\D3D9_DiffuseTexture.rs</Link>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL2_Font.rs">
+      <Link>Data\GL2_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GL3_DiffuseTexture.rs">
-      <Link>Data\GL3_DiffuseTexture.rs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GL2_DiffuseTexture.rs">
-      <Link>Data\GL2_DiffuseTexture.rs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Data\Images\Wolf.dds">
-      <Link>Data\Wolf.dds</Link>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL3_Font.rs">
+      <Link>Data\GL3_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">
@@ -125,6 +112,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\Data\Fonts\Font.png">
+      <Link>Data\Font.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Fonts\Font.xml">
+      <Link>Data\Font.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
