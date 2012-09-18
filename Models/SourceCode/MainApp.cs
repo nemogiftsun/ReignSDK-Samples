@@ -31,6 +31,8 @@ namespace Demo_Windows
 		: base(ApplicationOrientations.Landscape)
 		#elif XNA
 		: base(512, 512)
+		#elif iOS
+		: base(ApplicationOrientations.Landscape, false)
 		#endif
 		{
 			
@@ -48,7 +50,7 @@ namespace Demo_Windows
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
-				#elif OSX
+				#elif OSX || iOS
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, false);
 				#endif
 				
@@ -62,7 +64,12 @@ namespace Demo_Windows
 				var materialFieldTypes = new List<MaterialFieldBinder>();
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
-				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, video, "Data\\", materialTypes, materialFieldTypes);
+				Dictionary<string,string> extOverrides;
+				#if iOS
+				extOverrides = new Dictionary<string,string>();
+				extOverrides.Add(".dds", ".pvr");
+				#endif
+				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, video, "Data\\", materialTypes, materialFieldTypes, extOverrides);
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
