@@ -7,7 +7,7 @@ using ShaderMaterials.Shaders;
 
 namespace Demo_Windows
 {
-	#if WINDOWS
+	#if WINDOWS || OSX
 	class MainApp : Window
 	#else
 	class MainApp : Application
@@ -25,7 +25,7 @@ namespace Demo_Windows
 		SamplerStateI samplerState;
 
 		public MainApp()
-		#if WINDOWS
+		#if WINDOWS || OSX
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
@@ -45,13 +45,16 @@ namespace Demo_Windows
 				#if WINDOWS
 				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, false);
 				#elif METRO
-				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
+				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
+				#elif OSX
+				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, false);
 				#endif
+				
 				DiffuseTextureMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
-
+				
 				var softwareModel = new SoftwareModel("Data\\box.dae");
 				var materialTypes = new Dictionary<string,Type>();
 				materialTypes.Add("Material", typeof(DiffuseTextureMaterial));
@@ -100,6 +103,7 @@ namespace Demo_Windows
 
 		protected override void update(Time time)
 		{
+			if (!loaded) return;
 			camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
 		}
 
@@ -107,6 +111,7 @@ namespace Demo_Windows
 		{
 			if (!loaded) return;
 
+			video.Update();
 			var e = Streams.TryLoad();
 			if (e != null)
 			{
@@ -116,7 +121,6 @@ namespace Demo_Windows
 			}
 			if (Streams.ItemsRemainingToLoad != 0) return;
 
-			video.Update();
 			video.EnableRenderTarget();
 			video.Clear(0, .3f, .3f, 1);
 			rasterizerState.Enable();
