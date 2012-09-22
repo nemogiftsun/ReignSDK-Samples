@@ -18,7 +18,8 @@ namespace Demo_Windows
 		VideoI video;
 		ViewPortI viewPort;
 		Camera camera;
-		ModelI model;
+		ModelI model, model2;
+		Vector3 modelOffset;
 
 		RasterizerStateI rasterizerState;
 		DepthStencilStateI depthStencilState;
@@ -64,12 +65,13 @@ namespace Demo_Windows
 				var materialFieldTypes = new List<MaterialFieldBinder>();
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
-				Dictionary<string,string> extOverrides;
+				Dictionary<string,string> extOverrides = null;
 				#if iOS
 				extOverrides = new Dictionary<string,string>();
 				extOverrides.Add(".dds", ".pvr");
 				#endif
-				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, video, "Data\\", materialTypes, materialFieldTypes, extOverrides);
+				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, materialFieldTypes, extOverrides);
+				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, materialFieldTypes, extOverrides);
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
@@ -105,7 +107,7 @@ namespace Demo_Windows
 
 		private void applyInstanceData(DiffuseTextureMaterial material, MeshI mesh)
 		{
-			material.Transform = new Matrix4(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Location);
+			material.Transform = new Matrix4(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Location + modelOffset);
 		}
 
 		protected override void update(Time time)
@@ -139,7 +141,10 @@ namespace Demo_Windows
 
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;
 			DiffuseTextureMaterial.LightDirection = -camera.Location.Normalize();
+			modelOffset = new Vector3();
 			model.Render();
+			modelOffset = new Vector3(3, 0, 0);
+			model2.Render();
 
 			#if !XNA
 			video.Present();

@@ -135,6 +135,10 @@
       <Link>Data\Wolf.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\..\Data\Models\box.rm">
+      <Link>Data\box.rm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Demo_Metro_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
