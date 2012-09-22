@@ -26,6 +26,7 @@ namespace Demo_Windows
 
 		RasterizerStateI rasterizerState;
 		DepthStencilStateI depthStencilState;
+		BlendStateI blendState;
 		SamplerStateI samplerState;
 
 		public MainApp()
@@ -91,6 +92,7 @@ namespace Demo_Windows
 
 				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullCW));
 				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.ReadWrite_Less));
+				blendState = BlendState.Create(videoType, video, BlendStateDesc.Create(videoType, BlendStateTypes.None));
 				samplerState = SamplerState.Create(videoType, video, SamplerStateDesc.Create(videoType, SamplerStateTypes.Linear_Wrap));
 
 				loaded = true;
@@ -146,6 +148,7 @@ namespace Demo_Windows
 			video.Clear(0, .3f, .3f, 1);
 			rasterizerState.Enable();
 			depthStencilState.Enable();
+			blendState.Enable();
 			samplerState.Enable(0);
 
 			viewPort.Apply();
@@ -158,9 +161,7 @@ namespace Demo_Windows
 			modelOffset = new Vector3(3, 0, 0);
 			model2.Render();
 
-			#if !XNA
 			video.Present();
-			#endif
 		}
 	}
 }
