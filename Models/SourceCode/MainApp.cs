@@ -10,7 +10,9 @@ namespace Demo_Windows
 	#if WINDOWS || OSX
 	class MainApp : Window
 	#else
+	#if ANDROID
 	[Android.App.Activity (MainLauncher = true)]
+	#endif
 	public class MainApp : Application
 	#endif
 	{
