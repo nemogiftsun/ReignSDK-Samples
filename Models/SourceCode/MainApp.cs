@@ -70,8 +70,8 @@ namespace Demo_Windows
 				extOverrides = new Dictionary<string,string>();
 				extOverrides.Add(".dds", ".pvr");
 				#endif
-				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, materialFieldTypes, extOverrides);
-				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, materialFieldTypes, extOverrides);
+				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, null, null, null, null, materialFieldTypes, extOverrides);
+				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, null, null, null, null, materialFieldTypes, extOverrides);
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
