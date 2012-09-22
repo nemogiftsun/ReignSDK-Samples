@@ -118,5 +118,8 @@
     <Content Include="..\..\..\Data\Shaders\Compiled\GL2_DiffuseTexture.rs">
       <Link>Data\GL2_DiffuseTexture.rs</Link>
     </Content>
+    <Content Include="..\..\..\Data\Models\box.rm">
+      <Link>Data\box.rm</Link>
+    </Content>
   </ItemGroup>
 </Project>

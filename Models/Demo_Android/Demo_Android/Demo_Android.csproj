@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DE1EACEE-7097-4F68-8CC3-CDD02F6C2713}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Demo_Android</RootNamespace>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AssemblyName>Demo_Android</AssemblyName>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;ANDROID</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a</AndroidSupportedAbis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <DefineConstants>ANDROID</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Reign.Core">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Android\Lib\Reign.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Android\Lib\Reign.Video.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.OpenGL">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Android\Lib\Reign.Video.OpenGL.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Android\Lib\Reign.Video.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\SourceCode\MainApp.cs">
+      <Link>MainApp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+      <Link>DiffuseTexture.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Resources\layout\" />
+    <Folder Include="Assets\" />
+    <Folder Include="Assets\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="..\..\..\Data\Shaders\Compiled\GLES2_DiffuseTexture.rs">
+      <Link>Assets\Data\GLES2_DiffuseTexture.rs</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Images\Roxy.atc">
+      <Link>Assets\Data\Roxy.atc</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Images\Wolf.atc">
+      <Link>Assets\Data\Wolf.atc</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Models\box.dae">
+      <Link>Assets\Data\box.dae</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Models\box.rm">
+      <Link>Assets\Data\box.rm</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Images\Roxy.dds">
+      <Link>Assets\Data\Roxy.dds</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Images\Roxy.pvr">
+      <Link>Assets\Data\Roxy.pvr</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Images\Wolf.dds">
+      <Link>Assets\Data\Wolf.dds</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Images\Wolf.pvr">
+      <Link>Assets\Data\Wolf.pvr</Link>
+    </AndroidAsset>
+  </ItemGroup>
+</Project>

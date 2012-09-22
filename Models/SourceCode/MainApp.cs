@@ -10,7 +10,8 @@ namespace Demo_Windows
 	#if WINDOWS || OSX
 	class MainApp : Window
 	#else
-	class MainApp : Application
+	[Android.App.Activity (MainLauncher = true)]
+	public class MainApp : Application
 	#endif
 	{
 		bool loaded;
@@ -34,6 +35,8 @@ namespace Demo_Windows
 		: base(512, 512)
 		#elif iOS
 		: base(ApplicationOrientations.Landscape, false)
+		#elif ANDROID
+		: base(ApplicationOrientations.Landscape, UpdateAndRenderModes.Stepping, 60, false, null)
 		#endif
 		{
 			
@@ -51,8 +54,10 @@ namespace Demo_Windows
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
-				#elif OSX || iOS
+				#elif OSX
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, false);
+				#elif iOS || ANDROID
+				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this);
 				#endif
 				
 				DiffuseTextureMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
@@ -69,6 +74,11 @@ namespace Demo_Windows
 				#if iOS
 				extOverrides = new Dictionary<string,string>();
 				extOverrides.Add(".dds", ".pvr");
+				#endif
+				#if ANDROID
+				extOverrides = new Dictionary<string,string>();
+				if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_ATC) extOverrides.Add(".dds", ".atc");
+				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
 				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, null, null, null, null, materialFieldTypes, extOverrides);
 				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, null, null, null, null, materialFieldTypes, extOverrides);

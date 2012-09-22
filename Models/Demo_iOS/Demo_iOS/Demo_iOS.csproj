@@ -141,5 +141,8 @@
     <Content Include="..\..\..\Data\Images\Wolf.pvr">
       <Link>Data\Wolf.pvr</Link>
     </Content>
+    <Content Include="..\..\..\Data\Models\box.rm">
+      <Link>Data\box.rm</Link>
+    </Content>
   </ItemGroup>
 </Project>
