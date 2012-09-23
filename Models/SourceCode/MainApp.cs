@@ -52,7 +52,7 @@ namespace Demo_Windows
 				root = new RootDisposable();
 				VideoTypes videoType;
 				#if WINDOWS
-				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, false);
+				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif METRO
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
 				#elif XNA

@@ -46,7 +46,7 @@ namespace Demo_Windows
 				root = new RootDisposable();
 				VideoTypes videoType;
 				#if WINDOWS
-				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, false);
+				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif METRO
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
@@ -91,21 +91,10 @@ namespace Demo_Windows
 		}
 
 		Time uTime;
-		int fpsTic, FPS, lastTick;
 		protected override void update(Time time)
 		{
 			uTime = time;
-			if (OS.UpdateAndRenderMode == UpdateAndRenderModes.Stepping) camera.RotateAroundLookLocationWorld(new Reign.Core.Vector3(.25f, .5f, .75f) * time.Delta);
-			else camera.RotateAroundLookLocationWorld(new Reign.Core.Vector3(.01f, .015f, .01f));
-
-			++fpsTic;
-			int currentTic = Environment.TickCount;
-			if (currentTic - lastTick >= 1000)
-			{
-			    FPS = fpsTic;
-			    fpsTic = 0;
-			    lastTick = currentTic;
-			}
+			camera.RotateAroundLookLocationWorld(new Reign.Core.Vector3(.25f, .5f, .75f) * time.Delta);
 		}
 
 		protected override void render(Time time)
@@ -133,7 +122,7 @@ namespace Demo_Windows
 			camera.Apply();
 			
 			font.DrawStart(camera);
-			font.Draw(string.Format("RFPS: {0} - UFPS: {1}", time.FPS, FPS), new Vector2(), new Vector4(1), .5f, true, true);
+			font.Draw(string.Format("RFPS: {0} - UFPS: {1}", uTime.FPS, time.FPS), new Vector2(), new Vector4(1), .5f, true, true);
 
 			#if !XNA
 			video.Present();
