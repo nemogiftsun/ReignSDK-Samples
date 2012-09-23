@@ -50,8 +50,9 @@ namespace Demo_Windows
 
 		private void playSound_Click(object sender, RoutedEventArgs e)
 		{
-			if (soundInstance == null) soundInstance = sound.Play(.5f);
-			else soundInstance.Play(.5f);
+			var instance = sound.Play(.5f);
+			if (instance != null) soundInstance = instance;
+			else if (soundInstance != null) soundInstance.Play(.5f);
 		}
 
 		private void pauseSound_Click(object sender, RoutedEventArgs e)

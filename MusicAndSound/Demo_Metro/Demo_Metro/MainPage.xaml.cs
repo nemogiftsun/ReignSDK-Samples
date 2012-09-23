@@ -53,8 +53,9 @@ namespace Demo_Metro
 
 		private void playSound_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
-			if (soundInstance == null) soundInstance = sound.Play(.5f);
-			else soundInstance.Play(.5f);
+			var instance = sound.Play(.5f);
+			if (instance != null) soundInstance = instance;
+			else if (soundInstance != null) soundInstance.Play(.5f);
 		}
 
 		private void pauseSound_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

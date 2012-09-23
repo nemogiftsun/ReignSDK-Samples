@@ -56,11 +56,11 @@ namespace Demo_Windows
 				#if WINDOWS
 				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif METRO
-				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
+				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
 				#elif OSX
-				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, false);
+				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif iOS || ANDROID
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this);
 				#endif
@@ -156,6 +156,7 @@ namespace Demo_Windows
 			blendState.Enable();
 			samplerState.Enable(0);
 
+			viewPort.Size = FrameSize;
 			viewPort.Apply();
 			camera.Apply();
 
