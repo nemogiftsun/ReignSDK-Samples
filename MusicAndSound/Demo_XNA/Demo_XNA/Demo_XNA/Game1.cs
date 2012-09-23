@@ -68,8 +68,9 @@ namespace Demo_XNA
 
 			if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
 			{
-				if (soundInstance == null) soundInstance = sound.Play(.5f);
-				else soundInstance.Play(.5f);
+				var instance = sound.Play(.5f);
+				if (instance != null) soundInstance = instance;
+				else if (soundInstance != null) soundInstance.Play(.5f);
 			}
 
 			if (GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed)
