@@ -34,8 +34,10 @@ namespace Demo_Windows
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
-		#elif XNA
+		#elif XNA && !XBOX360
 		: base(512, 512)
+		#elif XBOX360
+		: base(0, 0)
 		#elif iOS
 		: base(ApplicationOrientations.Landscape, false)
 		#elif ANDROID
@@ -73,18 +75,17 @@ namespace Demo_Windows
 				var materialFieldTypes = new List<MaterialFieldBinder>();
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
-				Dictionary<string,string> extOverrides = null;
+				Dictionary<string,string> extOverrides = new Dictionary<string,string>();
 				#if iOS
-				extOverrides = new Dictionary<string,string>();
 				extOverrides.Add(".dds", ".pvr");
 				#endif
 				#if ANDROID
-				extOverrides = new Dictionary<string,string>();
 				if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_ATC) extOverrides.Add(".dds", ".atc");
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
-				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, null, null, null, null, materialFieldTypes, extOverrides);
-				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, null, null, null, null, materialFieldTypes, extOverrides);
+				var emptyBinders = new List<MaterialFieldBinder>();// XNA on Xbox360 seems to have a bug in (Activator.CreateInstance) if these are null
+				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
@@ -128,6 +129,10 @@ namespace Demo_Windows
 		{
 			if (!loaded) return;
 			camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
+
+			#if XNA
+			if (Microsoft.Xna.Framework.Input.GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed) Exit();
+			#endif
 		}
 
 		protected override void render(Time time)
@@ -143,7 +148,7 @@ namespace Demo_Windows
 				return;
 			}
 			if (Streams.ItemsRemainingToLoad != 0) return;
-
+			
 			video.EnableRenderTarget();
 			video.Clear(0, .3f, .3f, 1);
 			rasterizerState.Enable();
