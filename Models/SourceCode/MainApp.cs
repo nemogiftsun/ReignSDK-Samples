@@ -7,7 +7,7 @@ using ShaderMaterials.Shaders;
 
 namespace Demo_Windows
 {
-	#if WINDOWS || OSX
+	#if WINDOWS || OSX || LINUX
 	class MainApp : Window
 	#else
 	#if ANDROID
@@ -30,7 +30,7 @@ namespace Demo_Windows
 		SamplerStateI samplerState;
 
 		public MainApp()
-		#if WINDOWS || OSX
+		#if WINDOWS || OSX || LINUX
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
@@ -59,8 +59,8 @@ namespace Demo_Windows
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
-				#elif OSX
-				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, true);
+				#elif OSX || LINUX
+				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, false);
 				#elif iOS || ANDROID
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this);
 				#endif
