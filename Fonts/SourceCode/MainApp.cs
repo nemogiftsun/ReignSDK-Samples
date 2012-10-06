@@ -59,7 +59,7 @@ namespace Demo_Windows
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
-				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, Reign.Core.Math.DegToRad(45));
+				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, MathUtilities.DegToRad(45));
 
 				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullNone));
 				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.ReadWrite_Less));
@@ -122,7 +122,7 @@ namespace Demo_Windows
 			camera.Apply();
 			
 			font.DrawStart(camera);
-			font.Draw(string.Format("RFPS: {0} - UFPS: {1}", uTime.FPS, time.FPS), new Vector2(), new Vector4(1), .5f, true, true);
+			font.Draw(string.Format("RFPS: {0} - UFPS: {1}", time.FPS, uTime.FPS), new Vector2(), new Vector4(1), .5f, true, true);
 
 			#if !XNA
 			video.Present();

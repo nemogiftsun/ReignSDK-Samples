@@ -52,7 +52,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\XNA_QuickDraw3ColorUV.fx">
+    <Compile Include="..\..\..\..\..\ReignShaders\XNA_QuickDraw3ColorUV.fx">
       <Link>XNA_QuickDraw3ColorUV.fx</Link>
       <Name>XNA_QuickDraw3ColorUV</Name>
       <Importer>EffectImporter</Importer>

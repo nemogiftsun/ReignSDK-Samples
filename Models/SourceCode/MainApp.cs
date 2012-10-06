@@ -75,7 +75,7 @@ namespace Demo_Windows
 				var materialFieldTypes = new List<MaterialFieldBinder>();
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
-				Dictionary<string,string> extOverrides = new Dictionary<string,string>();
+				var extOverrides = new Dictionary<string,string>();
 				#if iOS
 				extOverrides.Add(".dds", ".pvr");
 				#endif

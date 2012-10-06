@@ -65,7 +65,7 @@ namespace Demo
 				#endif
 
 				#if WINDOWS || METRO
-				video = Video.Create(createVideoTypes, out videoType, root, this, false);
+				video = Video.Create(createVideoTypes, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(createVideoTypes, out videoType, root, this);
 				#endif
@@ -131,12 +131,12 @@ namespace Demo
 			if (keyboard.ArrowUp.On) camera.Zoom(1 * time.Delta, 1);
 			if (keyboard.ArrowDown.On) camera.Zoom(-1 * time.Delta, 1);
 			if (!mouse.Left.On) camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
-			else camera.RotateAroundLookLocation(-mouse.Velocity.Y * 1 * time.Delta, -mouse.Velocity.X * 1 * time.Delta, 0);
+			else camera.RotateAroundLookLocation(mouse.Velocity.Y * 1 * time.Delta, mouse.Velocity.X * 1 * time.Delta, 0);
 			#elif XNA
-			if (gamePad.A.On) camera.Zoom(.05f * time.Delta, 1);
-			if (gamePad.B.On) camera.Zoom(-.05f * time.Delta, 1);
-			if (gamePad.LeftStick.Length() <= .1f) camera.RotateAroundLookLocationWorld(0, .01f * time.Delta, 0);
-			else camera.RotateAroundLookLocation(-gamePad.LeftStick.Y * .05f * time.Delta, gamePad.LeftStick.X * .05f * time.Delta, 0);
+			if (gamePad.A.On) camera.Zoom(1 * time.Delta, 1);
+			if (gamePad.B.On) camera.Zoom(-1 * time.Delta, 1);
+			if (gamePad.LeftStick.Length() <= .1f) camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
+			else camera.RotateAroundLookLocation(-gamePad.LeftStick.Y * 1 * time.Delta, -gamePad.LeftStick.X * 1 * time.Delta, 0);
 			if (gamePad.Back.Up) Exit();
 			#endif
 		}

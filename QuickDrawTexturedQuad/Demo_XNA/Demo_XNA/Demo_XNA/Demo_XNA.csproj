@@ -128,7 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw3ColorUV.cs">
+    <Compile Include="..\..\..\..\..\ReignShaders\QuickDraw3ColorUV.cs">
       <Link>QuickDraw3ColorUV.cs</Link>
     </Compile>
     <Compile Include="..\..\..\SourceCode\MainApp.cs">
