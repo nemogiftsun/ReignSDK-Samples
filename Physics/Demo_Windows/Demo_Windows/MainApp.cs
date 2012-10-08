@@ -15,6 +15,7 @@ using Jitter.Dynamics.Constraints;
 using Jitter.Dynamics.Joints;
 using System.Reflection;
 using System.Diagnostics;
+using Reign.Physics;
 
 namespace Demo
 {
@@ -38,11 +39,11 @@ namespace Demo
 		BlendStateI blendState;
 		DepthStencilStateI depthStencilState;
 
-		ModelI sphereModel, capsuleModel, boxModel;
+		ModelI sphereModel, capsuleModel, boxModel, monkeyModel;
 		CollisionSystem collisionSystem;
 		World world;
 		RigidBody[] spheres;
-		RigidBody floorBox;
+		RigidBody floorBox, monkey;
 		
 		public MainApp()
 		#if WINDOWS
@@ -89,7 +90,7 @@ namespace Demo
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
 				float camDis = 50;
-				camera = new Camera(viewPort, new Vector3(0, 7, camDis), new Vector3(), new Vector3(0, 7+1, camDis));
+				camera = new Camera(viewPort, new Vector3(0, 5, camDis), new Vector3(), new Vector3(0, 5+1, camDis));
 
 				// states
 				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullCW));
@@ -107,8 +108,9 @@ namespace Demo
 				var extOverrides = new Dictionary<string,string>();
 				var emptyBinders = new List<MaterialFieldBinder>();
 				sphereModel = Model.Create(videoType, video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				capsuleModel = Model.Create(videoType, video, "Data/capsule.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				//capsuleModel = Model.Create(videoType, video, "Data/capsule.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
 				boxModel = Model.Create(videoType, video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				monkeyModel = Model.Create(videoType, video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
 				
 				// physics
 				collisionSystem = new CollisionSystemPersistentSAP();
@@ -119,14 +121,15 @@ namespace Demo
 				for (int i = 0; i != spheres.Length; ++i)
 				{
 					spheres[i] = new RigidBody(new SphereShape(1));
-					spheres[i].Position = new JVector(spheres.Length/(float)i, (i*3)+5, 0);
+					spheres[i].Position = new JVector(spheres.Length/(float)(i+1), (i*3)+5, 0);
 					world.AddBody(spheres[i]);
 				}
 				floorBox = new RigidBody(new BoxShape(30, 1, 30));
 				floorBox.Position = new JVector(0, -7, 0);
 				floorBox.IsStatic = true;
-				//floorBox.Orientation = JMatrix.CreateFromYawPitchRoll(0, 0, -1f);
+				//floorBox.Orientation = JMatrix.CreateFromYawPitchRoll(0, -.25f, 0);
 				world.AddBody(floorBox);
+				new TriangleMesh("Data/monkeyFlat.rtmm", loadTiangleMesh);
 
 				loaded = true;
 			}
@@ -135,6 +138,14 @@ namespace Demo
 				Message.Show("Error", e.Message);
 				dispose();
 			}
+		}
+
+		private void loadTiangleMesh(TriangleMesh mesh)
+		{
+		    mesh.Scale(5);
+		    monkey = new RigidBody(new TriangleMeshShape(new Octree(mesh)));
+		    //monkey.IsStatic = true;
+		    world.AddBody(monkey);
 		}
 
 		private void dispose()
@@ -158,6 +169,8 @@ namespace Demo
 
 		protected override void update(Time time)
 		{
+			if (!loaded) return;
+
             world.Step(time.Delta, true);
 			camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
 		}
@@ -174,6 +187,10 @@ namespace Demo
 			else if (renderMode == 1)
 			{
 				material.Transform = floorBox.Transform;
+			}
+			else if (renderMode == 2)
+			{
+				material.Transform = monkey.Transform;
 			}
 		}
 
@@ -225,8 +242,15 @@ namespace Demo
 			mesh.Material.Apply(mesh);
 			mesh.VertexBuffer.Draw();
 
+			// monkey
+			renderMode = 2;
+			mesh = monkeyModel.Meshes[0];
+			mesh.VertexBuffer.Enable(mesh.IndexBuffer);
+			mesh.Material.Apply(mesh);
+			mesh.VertexBuffer.Draw();
+
 			// ray cast
-			var rayOrg =  new JVector(0, 5, 0);
+			/*var rayOrg =  new JVector(0, 5, 0);
 			var rayDir = new JVector(.3f, -1, 0);
 			JVector normal;
 			float fraction;
@@ -245,7 +269,7 @@ namespace Demo
 			    qd.Pos(rayOrg.X, rayOrg.Y, rayOrg.Z);
 			    normal *= 10;
 			    qd.Pos(rayOrg.X+normal.X, rayOrg.Y+normal.Y, rayOrg.Z+normal.Z);
-			qd.End();
+			qd.End();*/
 
 			video.Present();
 		}
