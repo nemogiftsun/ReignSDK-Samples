@@ -125,6 +125,7 @@ namespace Demo
 					world.AddBody(spheres[i]);
 				}
 				floorBox = new RigidBody(new BoxShape(30, 1, 30));
+				floorBox.Shape.TransformScale = new Vector3(30, 1, 30) * .5f;
 				floorBox.Position = new JVector(0, -7, 0);
 				floorBox.IsStatic = true;
 				//floorBox.Orientation = JMatrix.CreateFromYawPitchRoll(0, -.25f, 0);
@@ -144,6 +145,7 @@ namespace Demo
 		{
 		    mesh.Scale(5);
 		    monkey = new RigidBody(new TriangleMeshShape(new Octree(mesh)));
+			monkey.Shape.TransformScale = new Vector3(5);
 		    //monkey.IsStatic = true;
 		    world.AddBody(monkey);
 		}
