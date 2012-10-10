@@ -12,7 +12,7 @@ namespace Demo_Windows
 		#endif
 		static void Main()
 		{
-			OS.Run(new MainApp(), 60);
+			OS.Run(new MainApp(), 0);
 		}
 	}
 }

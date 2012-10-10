@@ -92,34 +92,34 @@
     <Compile Include="..\..\SourceCode\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
-      <Link>DiffuseTexture.cs</Link>
-    </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\DiffuseTexture.cs">
+      <Link>DiffuseTexture.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Data\Models\box.dae">
-      <Link>Data\box.dae</Link>
-    </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GL3_DiffuseTexture.rs">
-      <Link>Data\GL3_DiffuseTexture.rs</Link>
-    </Content>
     <Content Include="..\..\..\Data\Images\Roxy.dds">
       <Link>Data\Roxy.dds</Link>
     </Content>
     <Content Include="..\..\..\Data\Images\Wolf.dds">
       <Link>Data\Wolf.dds</Link>
     </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GL2_DiffuseTexture.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL3_DiffuseTexture.rs">
+      <Link>Data\GL3_DiffuseTexture.rs</Link>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL2_DiffuseTexture.rs">
       <Link>Data\GL2_DiffuseTexture.rs</Link>
     </Content>
-    <Content Include="..\..\..\Data\Models\box.rm">
-      <Link>Data\box.rm</Link>
+    <Content Include="..\..\..\Data\Models\boxes.dae">
+      <Link>Data\boxes.dae</Link>
+    </Content>
+    <Content Include="..\..\..\Data\Models\boxes.rm">
+      <Link>Data\boxes.rm</Link>
     </Content>
   </ItemGroup>
 </Project>

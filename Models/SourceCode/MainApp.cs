@@ -31,7 +31,7 @@ namespace Demo_Windows
 
 		public MainApp()
 		#if WINDOWS || OSX || LINUX
-		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.FrameSizable)
+		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
 		#elif XNA && !XBOX360
@@ -56,7 +56,7 @@ namespace Demo_Windows
 				#if WINDOWS
 				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif METRO
-				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
+				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
 				#elif OSX || LINUX

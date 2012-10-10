@@ -63,7 +63,7 @@
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
   </ItemGroup>
@@ -81,20 +81,11 @@
     <Folder Include="Assets\Data\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="..\..\..\Data\Shaders\Compiled\GLES2_DiffuseTexture.rs">
-      <Link>Assets\Data\GLES2_DiffuseTexture.rs</Link>
-    </AndroidAsset>
     <AndroidAsset Include="..\..\..\Data\Images\Roxy.atc">
       <Link>Assets\Data\Roxy.atc</Link>
     </AndroidAsset>
     <AndroidAsset Include="..\..\..\Data\Images\Wolf.atc">
       <Link>Assets\Data\Wolf.atc</Link>
-    </AndroidAsset>
-    <AndroidAsset Include="..\..\..\Data\Models\box.dae">
-      <Link>Assets\Data\box.dae</Link>
-    </AndroidAsset>
-    <AndroidAsset Include="..\..\..\Data\Models\box.rm">
-      <Link>Assets\Data\box.rm</Link>
     </AndroidAsset>
     <AndroidAsset Include="..\..\..\Data\Images\Roxy.dds">
       <Link>Assets\Data\Roxy.dds</Link>
@@ -107,6 +98,15 @@
     </AndroidAsset>
     <AndroidAsset Include="..\..\..\Data\Images\Wolf.pvr">
       <Link>Assets\Data\Wolf.pvr</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\..\ReignSDK\Shaders\Compiled\GLES2_DiffuseTexture.rs">
+      <Link>Assets\Data\GLES2_DiffuseTexture.rs</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Models\boxes.dae">
+      <Link>Assets\Data\boxes.dae</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Data\Models\boxes.rm">
+      <Link>Assets\Data\boxes.rm</Link>
     </AndroidAsset>
   </ItemGroup>
 </Project>
