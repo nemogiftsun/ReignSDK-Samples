@@ -161,7 +161,7 @@ namespace Demo
 			samplerState.Enable(0);
 			blendState.Enable();
 			depthStencilState.Enable();
-			video.Clear(0, .3f, .3f, 1);
+			video.ClearColorDepth(0, .3f, .3f, 1);
 
 			viewPort.Apply();
 			camera.Apply();

@@ -120,7 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
     <Compile Include="..\..\..\SourceCode\MainApp.cs">

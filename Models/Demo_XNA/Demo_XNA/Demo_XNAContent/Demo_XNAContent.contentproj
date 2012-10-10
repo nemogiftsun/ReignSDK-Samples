@@ -57,14 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\Data\Models\box.dae">
-      <Link>box.dae</Link>
-      <Name>box</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\..\..\Data\Shaders\Compiled\XNA_DiffuseTexture.fx">
+    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\XNA_DiffuseTexture.fx">
       <Link>XNA_DiffuseTexture.fx</Link>
       <Name>XNA_DiffuseTexture</Name>
       <Importer>EffectImporter</Importer>
@@ -114,9 +107,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\Data\Models\box.rm">
-      <Link>box.rm</Link>
-      <Name>box</Name>
+    <Content Include="..\..\..\..\Data\Models\boxes.dae">
+      <Link>boxes.dae</Link>
+      <Name>boxes</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\Data\Models\boxes.rm">
+      <Link>boxes.rm</Link>
+      <Name>boxes</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

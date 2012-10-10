@@ -31,7 +31,7 @@ namespace Demo_Windows
 
 		public MainApp()
 		#if WINDOWS || OSX || LINUX
-		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
+		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.FrameSizable)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
 		#elif XNA && !XBOX360
@@ -56,7 +56,7 @@ namespace Demo_Windows
 				#if WINDOWS
 				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif METRO
-				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
+				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, false);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
 				#elif OSX || LINUX
@@ -68,7 +68,7 @@ namespace Demo_Windows
 				DiffuseTextureMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
-				var softwareModel = new SoftwareModel("Data\\box.dae");
+				var softwareModel = new SoftwareModel("Data\\boxes.dae", null);
 				var materialTypes = new Dictionary<string,Type>();
 				materialTypes.Add("Material", typeof(DiffuseTextureMaterial));
 				materialTypes.Add("Material.001", typeof(DiffuseTextureMaterial));
@@ -85,11 +85,11 @@ namespace Demo_Windows
 				#endif
 				var emptyBinders = new List<MaterialFieldBinder>();// XNA on Xbox360 seems to have a bug in (Activator.CreateInstance) if these are null
 				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				model2 = Model.Create(videoType, video, "Data\\box.rm", "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				model2 = Model.Create(videoType, video, "Data\\boxes.rm", "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
-				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, Reign.Core.Math.DegToRad(45));
+				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, MathUtilities.DegToRad(45));
 
 				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullCW));
 				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.ReadWrite_Less));
@@ -122,7 +122,7 @@ namespace Demo_Windows
 
 		private void applyInstanceData(DiffuseTextureMaterial material, MeshI mesh)
 		{
-			material.Transform = new Matrix4(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Location + modelOffset);
+			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Location + modelOffset);
 		}
 
 		protected override void update(Time time)
@@ -150,7 +150,7 @@ namespace Demo_Windows
 			if (Streams.ItemsRemainingToLoad != 0) return;
 			
 			video.EnableRenderTarget();
-			video.Clear(0, .3f, .3f, 1);
+			video.ClearColorDepth(0, .3f, .3f, 1);
 			rasterizerState.Enable();
 			depthStencilState.Enable();
 			blendState.Enable();
@@ -162,6 +162,7 @@ namespace Demo_Windows
 
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;
 			DiffuseTextureMaterial.LightDirection = -camera.Location.Normalize();
+			DiffuseTextureMaterial.LightColor = new Vector4(1);
 			modelOffset = new Vector3();
 			model.Render();
 			modelOffset = new Vector3(3, 0, 0);

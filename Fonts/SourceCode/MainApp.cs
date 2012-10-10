@@ -29,7 +29,7 @@ namespace Demo_Windows
 
 		public MainApp()
 		#if WINDOWS
-		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
+		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.FrameSizable)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
 		#elif XNA
@@ -112,12 +112,13 @@ namespace Demo_Windows
 
 			video.Update();
 			video.EnableRenderTarget();
-			video.Clear(0, 0, 0, 1);
+			video.ClearColorDepth(0, 0, 0, 1);
 			rasterizerState.Enable();
 			depthStencilState.Enable();
 			samplerState.Enable(0);
 			blendState.Enable();
 
+			viewPort.Size = FrameSize;
 			viewPort.Apply();
 			camera.Apply();
 			
