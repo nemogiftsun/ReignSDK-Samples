@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Demo
 {
-	#if WINDOWS
+	#if WINDOWS || LINUX
 	class MainApp : Window
 	#else
 	class MainApp : Application
@@ -18,9 +18,9 @@ namespace Demo
 		KeyboardI keyboard;
 
 		public MainApp()
-		#if WINDOWS
+		#if WINDOWS || LINUX
 		: base("Keycodes", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
-		#else
+		#elif METRO
 		: base(ApplicationOrientations.Landscape)
 		#endif
 		{
@@ -35,8 +35,10 @@ namespace Demo
 
 				#if WINDOWS
 				InputTypes inputType = InputTypes.WinForms;
-				#else
+				#elif METRO
 				InputTypes inputType = InputTypes.Metro;
+				#elif LINUX
+				InputTypes inputType = InputTypes.X11;
 				#endif
 
 				input = Input.Create(inputType, out inputType, root, this);
@@ -65,7 +67,11 @@ namespace Demo
 			input.Update();
 			for (int i = 0; i != 256; ++i)
 			{
+				#if WINDOWS || METRO
 				if (keyboard.Key(i).Down) System.Diagnostics.Debug.WriteLine(i);
+				#else
+				if (keyboard.Key(i).Down) Console.WriteLine(i);
+				#endif
 			}
 		}
 	}
