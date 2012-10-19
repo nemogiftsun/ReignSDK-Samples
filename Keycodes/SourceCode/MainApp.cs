@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Demo
 {
-	#if WINDOWS || LINUX
+	#if WINDOWS || OSX || LINUX
 	class MainApp : Window
 	#else
 	class MainApp : Application
@@ -18,7 +18,7 @@ namespace Demo
 		KeyboardI keyboard;
 
 		public MainApp()
-		#if WINDOWS || LINUX
+		#if WINDOWS || OSX || LINUX
 		: base("Keycodes", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
@@ -37,6 +37,8 @@ namespace Demo
 				InputTypes inputType = InputTypes.WinForms;
 				#elif METRO
 				InputTypes inputType = InputTypes.Metro;
+				#elif OSX
+				InputTypes inputType = InputTypes.Cocoa;
 				#elif LINUX
 				InputTypes inputType = InputTypes.X11;
 				#endif
