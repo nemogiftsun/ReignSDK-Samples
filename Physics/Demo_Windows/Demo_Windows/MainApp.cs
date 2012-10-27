@@ -107,10 +107,10 @@ namespace Demo
 
 				var extOverrides = new Dictionary<string,string>();
 				var emptyBinders = new List<MaterialFieldBinder>();
-				sphereModel = Model.Create(videoType, video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				sphereModel = Model.Create(videoType, video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
 				//capsuleModel = Model.Create(videoType, video, "Data/capsule.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				boxModel = Model.Create(videoType, video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				monkeyModel = Model.Create(videoType, video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				boxModel = Model.Create(videoType, video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				monkeyModel = Model.Create(videoType, video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
 				
 				// physics
 				collisionSystem = new CollisionSystemPersistentSAP();
@@ -222,7 +222,7 @@ namespace Demo
 			camera.Apply();
 
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;
-			DiffuseTextureMaterial.LightDirection = -camera.Location.Normalize();
+			DiffuseTextureMaterial.LightDirection = -camera.Position.Normalize();
 			DiffuseTextureMaterial.LightColor = new Vector4(1);
 			DiffuseTextureMaterial.BufferLayout.Enable();
 

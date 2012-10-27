@@ -97,14 +97,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\XNA_DiffuseTexture.fx">
+    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\XNA_DiffuseTexture.fx">
       <Link>XNA_DiffuseTexture.fx</Link>
       <Name>XNA_DiffuseTexture</Name>
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\..\..\..\Data\Models\boxes.dae">
       <Link>boxes.dae</Link>
       <Name>boxes</Name>

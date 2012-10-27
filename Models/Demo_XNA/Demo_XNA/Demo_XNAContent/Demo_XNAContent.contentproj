@@ -57,14 +57,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\XNA_DiffuseTexture.fx">
-      <Link>XNA_DiffuseTexture.fx</Link>
-      <Name>XNA_DiffuseTexture</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\..\..\..\Data\Images\Roxy.dds">
       <Link>Roxy.dds</Link>
       <Name>Roxy</Name>
@@ -107,6 +99,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\XNA_DiffuseTexture.fx">
+      <Link>XNA_DiffuseTexture.fx</Link>
+      <Name>XNA_DiffuseTexture</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
     <Content Include="..\..\..\..\Data\Models\boxes.dae">
       <Link>boxes.dae</Link>
       <Name>boxes</Name>

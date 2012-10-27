@@ -76,7 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw3ColorUV.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\QuickDraw3ColorUV.cs">
       <Link>QuickDraw3ColorUV.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
@@ -101,19 +101,19 @@
       <Link>Data\Roxy.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\D3D11_QuickDraw3ColorUV.rs">
       <Link>Data\D3D11_QuickDraw3ColorUV.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D9_QuickDraw3ColorUV.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\D3D9_QuickDraw3ColorUV.rs">
       <Link>Data\D3D9_QuickDraw3ColorUV.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL2_QuickDraw3ColorUV.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\GL2_QuickDraw3ColorUV.rs">
       <Link>Data\GL2_QuickDraw3ColorUV.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL3_QuickDraw3ColorUV.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\GL3_QuickDraw3ColorUV.rs">
       <Link>Data\GL3_QuickDraw3ColorUV.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -100,7 +100,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw3ColorUV.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\QuickDraw3ColorUV.cs">
       <Link>QuickDraw3ColorUV.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
@@ -119,11 +119,11 @@
       <Link>Data\Roxy.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.mrs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\D3D11_QuickDraw3ColorUV.mrs">
       <Link>Data\D3D11_QuickDraw3ColorUV.mrs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_QuickDraw3ColorUV.ref">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\D3D11_QuickDraw3ColorUV.ref">
       <Link>Data\D3D11_QuickDraw3ColorUV.ref</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

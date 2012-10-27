@@ -84,8 +84,8 @@ namespace Demo_Windows
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
 				var emptyBinders = new List<MaterialFieldBinder>();// XNA on Xbox360 seems to have a bug in (Activator.CreateInstance) if these are null
-				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				model2 = Model.Create(videoType, video, "Data\\boxes.rm", "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
+				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				model2 = Model.Create(videoType, video, "Data\\boxes.rm", "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
 
 				var frame = FrameSize;
 				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
@@ -122,7 +122,7 @@ namespace Demo_Windows
 
 		private void applyInstanceData(DiffuseTextureMaterial material, MeshI mesh)
 		{
-			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Location + modelOffset);
+			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Position + modelOffset);
 		}
 
 		protected override void update(Time time)
@@ -161,7 +161,7 @@ namespace Demo_Windows
 			camera.Apply();
 
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;
-			DiffuseTextureMaterial.LightDirection = -camera.Location.Normalize();
+			DiffuseTextureMaterial.LightDirection = -camera.Position.Normalize();
 			DiffuseTextureMaterial.LightColor = new Vector4(1);
 			modelOffset = new Vector3();
 			model.Render();

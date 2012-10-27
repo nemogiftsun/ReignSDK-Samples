@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\Font.cs">
       <Link>Font.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
@@ -87,19 +87,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_Font.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\D3D11_Font.rs">
       <Link>Data\D3D11_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D9_Font.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\D3D9_Font.rs">
       <Link>Data\D3D9_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL2_Font.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\GL2_Font.rs">
       <Link>Data\GL2_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\GL3_Font.rs">
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\GL3_Font.rs">
       <Link>Data\GL3_Font.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

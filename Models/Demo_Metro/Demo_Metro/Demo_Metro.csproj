@@ -100,7 +100,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\DiffuseTexture.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
@@ -123,20 +123,20 @@
       <Link>Data\Wolf.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_DiffuseTexture.mrs">
-      <Link>Data\D3D11_DiffuseTexture.mrs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\D3D11_DiffuseTexture.ref">
-      <Link>Data\D3D11_DiffuseTexture.ref</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\..\..\Data\Models\boxes.dae">
       <Link>Data\boxes.dae</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\Data\Models\boxes.rm">
       <Link>Data\boxes.rm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\D3D11_DiffuseTexture.mrs">
+      <Link>Data\D3D11_DiffuseTexture.mrs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\D3D11_DiffuseTexture.ref">
+      <Link>Data\D3D11_DiffuseTexture.ref</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Demo_Metro_TemporaryKey.pfx" />
