@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_OSX", "Demo_OSX\Demo_OSX.csproj", "{33A45412-576D-40F9-8DF0-2E805A7EAFF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		AppStore|x86 = AppStore|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33A45412-576D-40F9-8DF0-2E805A7EAFF2}.AppStore|x86.ActiveCfg = AppStore|x86
+		{33A45412-576D-40F9-8DF0-2E805A7EAFF2}.AppStore|x86.Build.0 = AppStore|x86
+		{33A45412-576D-40F9-8DF0-2E805A7EAFF2}.Debug|x86.ActiveCfg = Debug|x86
+		{33A45412-576D-40F9-8DF0-2E805A7EAFF2}.Debug|x86.Build.0 = Debug|x86
+		{33A45412-576D-40F9-8DF0-2E805A7EAFF2}.Release|x86.ActiveCfg = Release|x86
+		{33A45412-576D-40F9-8DF0-2E805A7EAFF2}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Demo_OSX\Demo_OSX.csproj
+	EndGlobalSection
+EndGlobal

@@ -8,7 +8,7 @@ using ShaderMaterials.Shaders;
 
 namespace Demo
 {
-	#if WINDOWS
+	#if WINDOWS || OSX
 	class MainApp : Window
 	#elif METRO || XNA
 	class MainApp : Application
@@ -29,7 +29,7 @@ namespace Demo
 		DepthStencilStateI depthStencilState;
 
 		InputI input;
-		#if WINDOWS || METRO
+		#if WINDOWS || METRO || OSX
 		MouseI mouse;
 		KeyboardI keyboard;
 		#elif XNA
@@ -37,7 +37,7 @@ namespace Demo
 		#endif
 		
 		public MainApp()
-		#if WINDOWS
+		#if WINDOWS || OSX
 		: base("QuickDraw Sample", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
@@ -62,9 +62,11 @@ namespace Demo
 				VideoTypes createVideoTypes = VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL;
 				#elif XNA
 				VideoTypes createVideoTypes = VideoTypes.XNA;
+				#elif OSX
+				VideoTypes createVideoTypes = VideoTypes.OpenGL;
 				#endif
 
-				#if WINDOWS || METRO
+				#if WINDOWS || METRO || OSX
 				video = Video.Create(createVideoTypes, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(createVideoTypes, out videoType, root, this);
@@ -93,9 +95,11 @@ namespace Demo
 				InputTypes createInputTypes = InputTypes.WinForms;
 				#elif XNA
 				InputTypes createInputTypes = InputTypes.XNA;
+				#elif OSX
+				InputTypes createInputTypes = InputTypes.Cocoa;
 				#endif
 				input = Input.Create(createInputTypes, out inputType, root, this);
-				#if WINDOWS || METRO
+				#if WINDOWS || METRO || OSX
 				mouse = Mouse.Create(inputType, input);
 				keyboard = Keyboard.Create(inputType, input);
 				#elif XNA
@@ -127,7 +131,7 @@ namespace Demo
 
 		protected override void update(Time time)
 		{
-			#if WINDOWS || METRO
+			#if WINDOWS || METRO || OSX
 			if (keyboard.ArrowUp.On) camera.Zoom(1 * time.Delta, 1);
 			if (keyboard.ArrowDown.On) camera.Zoom(-1 * time.Delta, 1);
 			if (!mouse.Left.On) camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
