@@ -60,33 +60,33 @@
     <Compile Include="..\..\SourceCode\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Data\Models\box.dae">
-      <Link>Data\box.dae</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Data\Models\box.rm">
-      <Link>Data\box.rm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GL2_DiffuseTexture.rs">
-      <Link>Data\GL2_DiffuseTexture.rs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GL3_DiffuseTexture.rs">
-      <Link>Data\GL3_DiffuseTexture.rs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\..\..\Data\Images\Roxy.dds">
       <Link>Data\Roxy.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\..\Data\Images\Wolf.dds">
       <Link>Data\Wolf.dds</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GL2_DiffuseTexture.rs">
+      <Link>Data\GL2_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GL3_DiffuseTexture.rs">
+      <Link>Data\GL3_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Models\boxes.dae">
+      <Link>Data\boxes.dae</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Models\boxes.rm">
+      <Link>Data\boxes.rm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
