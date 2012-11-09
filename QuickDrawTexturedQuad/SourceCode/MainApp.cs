@@ -131,6 +131,8 @@ namespace Demo
 
 		protected override void update(Time time)
 		{
+			if (!loaded) return;
+
 			#if WINDOWS || METRO || OSX
 			if (keyboard.ArrowUp.On) camera.Zoom(1 * time.Delta, 1);
 			if (keyboard.ArrowDown.On) camera.Zoom(-1 * time.Delta, 1);
@@ -148,6 +150,7 @@ namespace Demo
 		protected override void render(Time time)
 		{
 			if (!loaded) return;
+			video.Update();
 
 			var e = Streams.TryLoad();
 			if (e != null)
@@ -155,11 +158,11 @@ namespace Demo
 				Message.Show("Error", e.Message);
 				dispose();
 				loaded = false;
+				return;
 			}
 			if (Streams.ItemsRemainingToLoad != 0) return;
 
 			input.Update();
-			video.Update();
 			video.EnableRenderTarget();
 			rasterizerState.Enable();
 			samplerState.Enable(0);
