@@ -60,7 +60,7 @@ namespace Demo_Windows
 				#elif XNA
 				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);
 				#elif OSX || LINUX
-				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, true);
+				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif iOS || ANDROID
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this);
 				#endif

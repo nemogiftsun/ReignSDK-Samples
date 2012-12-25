@@ -71,7 +71,7 @@ namespace Demo
 				#elif XNA
 				video = Video.Init(createVideoTypes, out videoType, root, this, true);
 				#endif
-
+				
 				QuickDraw3ColorUVMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, qdMaterialLoaded, null);
 				material = new QuickDraw3ColorUVMaterial();
 				texture = Texture2DAPI.New(video, "Data/Roxy.dds", null, null);
