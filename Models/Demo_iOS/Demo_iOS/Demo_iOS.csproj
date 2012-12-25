@@ -121,7 +121,7 @@
     <Compile Include="..\..\SourceCode\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Data\Shaders\Compiled\DiffuseTexture.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
   </ItemGroup>
@@ -129,20 +129,20 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Data\Models\box.dae">
-      <Link>Data\box.dae</Link>
-    </Content>
-    <Content Include="..\..\..\Data\Shaders\Compiled\GLES2_DiffuseTexture.rs">
-      <Link>Data\GLES2_DiffuseTexture.rs</Link>
-    </Content>
     <Content Include="..\..\..\Data\Images\Roxy.pvr">
       <Link>Data\Roxy.pvr</Link>
     </Content>
     <Content Include="..\..\..\Data\Images\Wolf.pvr">
       <Link>Data\Wolf.pvr</Link>
     </Content>
-    <Content Include="..\..\..\Data\Models\box.rm">
-      <Link>Data\box.rm</Link>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GLES2_DiffuseTexture.rs">
+      <Link>Data\GLES2_DiffuseTexture.rs</Link>
+    </Content>
+    <Content Include="..\..\..\Data\Models\boxes.dae">
+      <Link>Data\boxes.dae</Link>
+    </Content>
+    <Content Include="..\..\..\Data\Models\boxes.rm">
+      <Link>Data\boxes.rm</Link>
     </Content>
   </ItemGroup>
 </Project>

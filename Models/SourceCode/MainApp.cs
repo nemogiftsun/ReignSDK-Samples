@@ -62,7 +62,7 @@ namespace Demo_Windows
 				#elif OSX || LINUX
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif iOS || ANDROID
-				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this);
+				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
 				
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
