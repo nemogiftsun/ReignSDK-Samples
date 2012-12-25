@@ -59,7 +59,7 @@ namespace Demo
 				#if METRO
 				VideoTypes createVideoTypes = VideoTypes.D3D11;
 				#elif WINDOWS
-				VideoTypes createVideoTypes = VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL;
+				VideoTypes createVideoTypes = VideoTypes.D3D11;// | VideoTypes.D3D9 | VideoTypes.OpenGL;
 				#elif XNA
 				VideoTypes createVideoTypes = VideoTypes.XNA;
 				#elif OSX
@@ -67,25 +67,24 @@ namespace Demo
 				#endif
 
 				#if WINDOWS || METRO || OSX
-				video = Video.Create(createVideoTypes, out videoType, root, this, true);
+				video = Video.Init(createVideoTypes, out videoType, root, this, true);
 				#elif XNA
-				video = Video.Create(createVideoTypes, out videoType, root, this);
+				video = Video.Init(createVideoTypes, out videoType, root, this, true);
 				#endif
 
-				QuickDraw3ColorUVMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
+				QuickDraw3ColorUVMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, qdMaterialLoaded, null);
 				material = new QuickDraw3ColorUVMaterial();
-				texture = Texture2D.Create(videoType, video, "Data\\Roxy.dds");
-				qd = QuickDraw.Create(videoType, video, QuickDraw3ColorUVMaterial.BufferLayoutDesc);
+				texture = Texture2DAPI.New(video, "Data/Roxy.dds", null, null);
 
 				var frame = FrameSize;
-				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
+				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
 				camera = new Camera(viewPort, new Vector3(0, 0, 5), new Vector3(), new Vector3(0, 0+1, 5));
 
 				// states
-				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullNone));
-				samplerState = SamplerState.Create(videoType, video, SamplerStateDesc.Create(videoType, SamplerStateTypes.Linear_Wrap));
-				blendState = BlendState.Create(videoType, video, BlendStateDesc.Create(videoType, BlendStateTypes.Alpha));
-				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.None));
+				rasterizerState = RasterizerStateAPI.New(video, RasterizerStateDescAPI.New(RasterizerStateTypes.Solid_CullNone));
+				samplerState = SamplerStateAPI.New(video, SamplerStateDescAPI.New(SamplerStateTypes.Linear_Wrap));
+				blendState = BlendStateAPI.New(video, BlendStateDescAPI.New(BlendStateTypes.Alpha));
+				depthStencilState = DepthStencilStateAPI.New(video, DepthStencilStateDescAPI.New(DepthStencilStateTypes.None));
 
 				// input
 				InputTypes inputType;
@@ -98,12 +97,12 @@ namespace Demo
 				#elif OSX
 				InputTypes createInputTypes = InputTypes.Cocoa;
 				#endif
-				input = Input.Create(createInputTypes, out inputType, root, this);
+				input = Input.Init(createInputTypes, out inputType, root, this);
 				#if WINDOWS || METRO || OSX
-				mouse = Mouse.Create(inputType, input);
-				keyboard = Keyboard.Create(inputType, input);
+				mouse = MouseAPI.New(input);
+				keyboard = KeyboardAPI.New(input);
 				#elif XNA
-				gamePad = GamePad.Create(InputTypes.XNA, input, GamePadControllers.All);
+				gamePad = GamePadAPI.New(input, GamePadControllers.All);
 				#endif
 
 				loaded = true;
@@ -115,8 +114,22 @@ namespace Demo
 			}
 		}
 
+		private void qdMaterialLoaded(object sender)
+		{
+			try
+			{
+				qd = QuickDrawAPI.New(video, QuickDraw3ColorUVMaterial.BufferLayoutDesc);
+			}
+			catch (Exception e)
+			{
+				Loader.AddLoadableException(e);
+			}
+		}
+
 		private void dispose()
 		{
+			loaded = false;
+			Loader.Clear();
 			if (root != null)
 			{
 				root.Dispose();
@@ -152,7 +165,7 @@ namespace Demo
 			if (!loaded) return;
 			video.Update();
 
-			var e = Streams.TryLoad();
+			var e = Loader.UpdateLoad();
 			if (e != null)
 			{
 				Message.Show("Error", e.Message);
@@ -160,7 +173,7 @@ namespace Demo
 				loaded = false;
 				return;
 			}
-			if (Streams.ItemsRemainingToLoad != 0) return;
+			if (Loader.ItemsRemainingToLoad != 0) return;
 
 			input.Update();
 			video.EnableRenderTarget();

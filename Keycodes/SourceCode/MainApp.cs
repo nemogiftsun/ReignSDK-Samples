@@ -43,8 +43,8 @@ namespace Demo
 				InputTypes inputType = InputTypes.X11;
 				#endif
 
-				input = Input.Create(inputType, out inputType, root, this);
-				keyboard = Keyboard.Create(inputType, input);
+				input = Input.Init(inputType, out inputType, root, this);
+				keyboard = KeyboardAPI.New(input);
 				loaded = true;
 			}
 			catch (Exception e)

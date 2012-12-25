@@ -21,7 +21,7 @@ namespace Demo_Windows
 		VideoI video;
 		ViewPortI viewPort;
 		Camera camera;
-		ModelI model, model2;
+		Model model, model2;
 		Vector3 modelOffset;
 
 		RasterizerStateI rasterizerState;
@@ -54,21 +54,21 @@ namespace Demo_Windows
 				root = new RootDisposable();
 				VideoTypes videoType;
 				#if WINDOWS
-				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
+				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);//VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL
 				#elif METRO
-				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
+				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
-				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
+				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);
 				#elif OSX || LINUX
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif iOS || ANDROID
 				video = Video.Create(VideoTypes.OpenGL, out videoType, root, this);
 				#endif
 				
-				DiffuseTextureMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
+				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
-				var softwareModel = new SoftwareModel("Data\\boxes.dae", null);
+				var softwareModel = new SoftwareModel("Data/boxes.dae", null, null);
 				var materialTypes = new Dictionary<string,Type>();
 				materialTypes.Add("Material", typeof(DiffuseTextureMaterial));
 				materialTypes.Add("Material.001", typeof(DiffuseTextureMaterial));
@@ -84,17 +84,17 @@ namespace Demo_Windows
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
 				var emptyBinders = new List<MaterialFieldBinder>();// XNA on Xbox360 seems to have a bug in (Activator.CreateInstance) if these are null
-				model = Model.Create(videoType, video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
-				model2 = Model.Create(videoType, video, "Data\\boxes.rm", "Data\\", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
+				model2 = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
 
 				var frame = FrameSize;
-				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
+				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
 				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, MathUtilities.DegToRad(45));
 
-				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullCW));
-				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.ReadWrite_Less));
-				blendState = BlendState.Create(videoType, video, BlendStateDesc.Create(videoType, BlendStateTypes.None));
-				samplerState = SamplerState.Create(videoType, video, SamplerStateDesc.Create(videoType, SamplerStateTypes.Linear_Wrap));
+				rasterizerState = RasterizerStateAPI.New(video, RasterizerStateDescAPI.New(RasterizerStateTypes.Solid_CullCW));
+				depthStencilState = DepthStencilStateAPI.New(video, DepthStencilStateDescAPI.New(DepthStencilStateTypes.ReadWrite_Less));
+				blendState = BlendStateAPI.New(video, BlendStateDescAPI.New(BlendStateTypes.None));
+				samplerState = SamplerStateAPI.New(video, SamplerStateDescAPI.New(SamplerStateTypes.Linear_Wrap));
 
 				loaded = true;
 			}
@@ -120,7 +120,7 @@ namespace Demo_Windows
 			dispose();
 		}
 
-		private void applyInstanceData(DiffuseTextureMaterial material, MeshI mesh)
+		private void applyInstanceData(DiffuseTextureMaterial material, Mesh mesh)
 		{
 			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Position + modelOffset);
 		}
@@ -128,6 +128,7 @@ namespace Demo_Windows
 		protected override void update(Time time)
 		{
 			if (!loaded) return;
+			
 			camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
 
 			#if XNA
@@ -140,14 +141,14 @@ namespace Demo_Windows
 			if (!loaded) return;
 
 			video.Update();
-			var e = Streams.TryLoad();
+			var e = Loader.UpdateLoad();
 			if (e != null)
 			{
 				Message.Show("File loading Error", e.Message);
 				dispose();
 				return;
 			}
-			if (Streams.ItemsRemainingToLoad != 0) return;
+			if (Loader.ItemsRemainingToLoad != 0) return;
 			
 			video.EnableRenderTarget();
 			video.ClearColorDepth(0, .3f, .3f, 1);

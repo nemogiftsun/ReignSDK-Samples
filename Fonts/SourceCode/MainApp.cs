@@ -19,7 +19,7 @@ namespace Demo_Windows
 		ViewPortI viewPort;
 		Camera camera;
 
-		FontI font;
+		Font font;
 		Texture2DI fontTexture;
 
 		RasterizerStateI rasterizerState;
@@ -46,25 +46,26 @@ namespace Demo_Windows
 				root = new RootDisposable();
 				VideoTypes videoType;
 				#if WINDOWS
-				video = Video.Create(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
+				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);//VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL
 				#elif METRO
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
 				#endif
-				FontMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
-
-				fontTexture = Texture2D.Create(videoType, video, "Data\\Font.png");
-				font = Reign.Video.API.Font.Create(videoType, video, FontMaterial.Shader, fontTexture, "Data\\Font.xml");
-
+				
+				FontMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
+				
+				fontTexture = Texture2DAPI.New(video, "Data/Font.png", null, null);
+				font = new Font(video, FontMaterial.Shader, fontTexture, "Data/Font.xml", null, null);
+				
 				var frame = FrameSize;
-				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
+				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
 				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, MathUtilities.DegToRad(45));
-
-				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullNone));
-				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.ReadWrite_Less));
-				samplerState = SamplerState.Create(videoType, video, SamplerStateDesc.Create(videoType, SamplerStateTypes.Linear_Wrap));
-				blendState = BlendState.Create(videoType, video, BlendStateDesc.Create(videoType, BlendStateTypes.Alpha));
+				
+				rasterizerState = RasterizerStateAPI.New(video, RasterizerStateDescAPI.New(RasterizerStateTypes.Solid_CullNone));
+				depthStencilState = DepthStencilStateAPI.New(video, DepthStencilStateDescAPI.New(DepthStencilStateTypes.ReadWrite_Less));
+				samplerState = SamplerStateAPI.New(video, SamplerStateDescAPI.New(SamplerStateTypes.Linear_Wrap));
+				blendState = BlendStateAPI.New(video, BlendStateDescAPI.New(BlendStateTypes.Alpha));
 
 				loaded = true;
 			}
@@ -93,6 +94,8 @@ namespace Demo_Windows
 		Time uTime;
 		protected override void update(Time time)
 		{
+			if (!loaded) return;
+			
 			uTime = time;
 			camera.RotateAroundLookLocationWorld(new Reign.Core.Vector3(.25f, .5f, .75f) * time.Delta);
 		}
@@ -101,15 +104,15 @@ namespace Demo_Windows
 		{
 			if (!loaded) return;
 
-			var e = Streams.TryLoad();
+			var e = Loader.UpdateLoad();
 			if (e != null)
 			{
 				Message.Show("File loading Error", e.Message);
 				dispose();
 				return;
 			}
-			if (Streams.ItemsRemainingToLoad != 0) return;
-
+			if (Loader.ItemsRemainingToLoad != 0) return;
+			
 			video.Update();
 			video.EnableRenderTarget();
 			video.ClearColorDepth(0, 0, 0, 1);

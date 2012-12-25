@@ -23,14 +23,14 @@ namespace Demo_Metro
 
 			root = new Core.RootDisposable();
 			AudioTypes audioType;
-			audio = Audio.Create(AudioTypes.XAudio | AudioTypes.Dumby, out audioType, root);
-			sound = Sound.Create(audioType, audio, "Data\\Explo2.wav", 1, false);
+			audio = Audio.Init(AudioTypes.XAudio | AudioTypes.Dumby, out audioType, root);
+			sound = SoundAPI.New(audio, "Data\\Explo2.wav", 1, false, null, null);
 
 			while (true)
 			{
-				var e = Core.Streams.TryLoad();
+				var e = Core.Loader.UpdateLoad();
 				if (e != null) throw e;
-				if (Core.Streams.ItemsRemainingToLoad == 0) break;
+				if (Core.Loader.ItemsRemainingToLoad == 0) break;
 			}
 
 			Windows.UI.Xaml.Media.CompositionTarget.Rendering += render;

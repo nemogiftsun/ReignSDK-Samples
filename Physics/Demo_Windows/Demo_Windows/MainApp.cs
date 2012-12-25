@@ -39,11 +39,12 @@ namespace Demo
 		BlendStateI blendState;
 		DepthStencilStateI depthStencilState;
 
-		ModelI sphereModel, capsuleModel, boxModel, monkeyModel;
+		Model sphereModel, capsuleModel, boxModel, monkeyModel;
 		CollisionSystem collisionSystem;
 		World world;
 		RigidBody[] spheres;
 		RigidBody floorBox, monkey;
+		TriangleMesh triangleMesh;
 		
 		public MainApp()
 		#if WINDOWS
@@ -68,35 +69,35 @@ namespace Demo
 				#if METRO
 				VideoTypes createVideoTypes = VideoTypes.D3D11;
 				#elif WINDOWS
-				VideoTypes createVideoTypes = VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL;
+				VideoTypes createVideoTypes = VideoTypes.D3D11;// | VideoTypes.D3D9 | VideoTypes.OpenGL;
 				#elif XNA
 				VideoTypes createVideoTypes = VideoTypes.XNA;
 				#endif
 
 				#if WINDOWS || METRO
-				video = Video.Create(createVideoTypes, out videoType, root, this, true);
+				video = Video.Init(createVideoTypes, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Create(createVideoTypes, out videoType, root, this);
 				#endif
 
 				// shaders
-				DiffuseTextureMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
+				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyDiffuseCallbackMethod;
-				QuickDraw3ColorMaterial.Init(videoType, video, "Data\\", video.FileTag, ShaderVersions.Max);
+				QuickDraw3ColorMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
 				material = new QuickDraw3ColorMaterial();
-				texture = Texture2D.Create(videoType, video, "Data\\Rocks.dds");
-				qd = QuickDraw.Create(videoType, video, QuickDraw3ColorMaterial.BufferLayoutDesc);
+				texture = Texture2DAPI.New(video, "Data/Rocks.dds", null, null);
+				qd = QuickDrawAPI.New(video, QuickDraw3ColorMaterial.BufferLayoutDesc);
 
 				var frame = FrameSize;
-				viewPort = ViewPort.Create(videoType, video, 0, 0, frame.Width, frame.Height);
+				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
 				float camDis = 50;
 				camera = new Camera(viewPort, new Vector3(0, 5, camDis), new Vector3(), new Vector3(0, 5+1, camDis));
 
 				// states
-				rasterizerState = RasterizerState.Create(videoType, video, RasterizerStateDesc.Create(videoType, RasterizerStateTypes.Solid_CullCW));
-				samplerState = SamplerState.Create(videoType, video, SamplerStateDesc.Create(videoType, SamplerStateTypes.Linear_Wrap));
-				blendState = BlendState.Create(videoType, video, BlendStateDesc.Create(videoType, BlendStateTypes.None));
-				depthStencilState = DepthStencilState.Create(videoType, video, DepthStencilStateDesc.Create(videoType, DepthStencilStateTypes.ReadWrite_Less));
+				rasterizerState = RasterizerStateAPI.New(video, RasterizerStateDescAPI.New(RasterizerStateTypes.Solid_CullCW));
+				samplerState = SamplerStateAPI.New(video, SamplerStateDescAPI.New(SamplerStateTypes.Linear_Wrap));
+				blendState = BlendStateAPI.New(video, BlendStateDescAPI.New(BlendStateTypes.None));
+				depthStencilState = DepthStencilStateAPI.New(video, DepthStencilStateDescAPI.New(DepthStencilStateTypes.ReadWrite_Less));
 
 				// models
 				var materialTypes = new Dictionary<string,Type>();
@@ -107,10 +108,10 @@ namespace Demo
 
 				var extOverrides = new Dictionary<string,string>();
 				var emptyBinders = new List<MaterialFieldBinder>();
-				sphereModel = Model.Create(videoType, video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				sphereModel = new Model(video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
 				//capsuleModel = Model.Create(videoType, video, "Data/capsule.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				boxModel = Model.Create(videoType, video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
-				monkeyModel = Model.Create(videoType, video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				boxModel = new Model(video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				monkeyModel = new Model(video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
 				
 				// physics
 				collisionSystem = new CollisionSystemPersistentSAP();
@@ -130,7 +131,7 @@ namespace Demo
 				floorBox.IsStatic = true;
 				//floorBox.Orientation = JMatrix.CreateFromYawPitchRoll(0, -.25f, 0);
 				world.AddBody(floorBox);
-				new TriangleMesh("Data/monkeyFlat.rtmm", loadTiangleMesh);
+				triangleMesh = new TriangleMesh("Data/monkeyFlat.rtmm", loadTiangleMesh, null);
 
 				loaded = true;
 			}
@@ -140,9 +141,11 @@ namespace Demo
 				dispose();
 			}
 		}
-
-		private void loadTiangleMesh(TriangleMesh mesh)
+		
+		private void loadTiangleMesh(object sender)
 		{
+			var mesh = (TriangleMesh)sender;
+
 		    mesh.Scale(5);
 		    monkey = new RigidBody(new TriangleMeshShape(new Octree(mesh)));
 			monkey.Shape.TransformScale = new Vector3(5);
@@ -179,7 +182,7 @@ namespace Demo
 
 		int nextSphere;
 		int renderMode;
-		private void applyDiffuseCallbackMethod(DiffuseTextureMaterial material, MeshI mesh)
+		private void applyDiffuseCallbackMethod(DiffuseTextureMaterial material, Mesh mesh)
 		{
 			if (renderMode == 0)
 			{
@@ -200,14 +203,14 @@ namespace Demo
 		{
 			if (!loaded) return;
 
-			var e = Streams.TryLoad();
+			var e = Loader.UpdateLoad();
 			if (e != null)
 			{
 				Message.Show("Error", e.Message);
 				dispose();
 				loaded = false;
 			}
-			if (Streams.ItemsRemainingToLoad != 0) return;
+			if (Loader.ItemsRemainingToLoad != 0) return;
 
 			video.Update();
 			video.EnableRenderTarget();
