@@ -41,7 +41,7 @@ namespace Demo_Windows
 		#elif iOS
 		: base(ApplicationOrientations.Landscape, false)
 		#elif ANDROID
-		: base(ApplicationOrientations.Landscape, UpdateAndRenderModes.Stepping, 60, false, null)
+		: base(ApplicationOrientations.Landscape, 0, false, null)
 		#endif
 		{
 			

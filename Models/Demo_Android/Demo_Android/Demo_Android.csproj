@@ -63,7 +63,7 @@
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\DiffuseTexture.cs">
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
   </ItemGroup>
@@ -99,14 +99,14 @@
     <AndroidAsset Include="..\..\..\Data\Images\Wolf.pvr">
       <Link>Assets\Data\Wolf.pvr</Link>
     </AndroidAsset>
-    <AndroidAsset Include="..\..\..\..\ReignSDK\Shaders\Compiled\GLES2_DiffuseTexture.rs">
-      <Link>Assets\Data\GLES2_DiffuseTexture.rs</Link>
-    </AndroidAsset>
     <AndroidAsset Include="..\..\..\Data\Models\boxes.dae">
       <Link>Assets\Data\boxes.dae</Link>
     </AndroidAsset>
     <AndroidAsset Include="..\..\..\Data\Models\boxes.rm">
       <Link>Assets\Data\boxes.rm</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GLES2_DiffuseTexture.rs">
+      <Link>Assets\Data\GLES2_DiffuseTexture.rs</Link>
     </AndroidAsset>
   </ItemGroup>
 </Project>
