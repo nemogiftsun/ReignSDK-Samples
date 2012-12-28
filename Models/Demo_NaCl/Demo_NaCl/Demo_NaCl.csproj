@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9E1C9DE-D507-4F93-83A6-EA10B456A5E9}</ProjectGuid>
+    <ProjectTypeGuids>{304EDB7B-59C9-4334-85AD-2F54227B63B9};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Demo_NaCl</RootNamespace>
+    <AppName>My MonoNaCl Project</AppName>
+    <GenerateManifest>True</GenerateManifest>
+    <AppVersion>1.0.0</AppVersion>
+    <AppDescription>This is a MonoNaCl project</AppDescription>
+    <CopyAllJsonObjects>True</CopyAllJsonObjects>
+    <RequiresGLES>True</RequiresGLES>
+    <CopyAllJSObjects>True</CopyAllJSObjects>
+    <CopyAllHtmlObjects>True</CopyAllHtmlObjects>
+    <AssemblyName>Demo_NaCl</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;NaCl</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <DefineConstants>NaCl</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SourceCode\MainApp.cs">
+      <Link>MainApp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SourceCode\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
+      <Link>DiffuseTexture.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.js" />
+    <None Include="main.html" />
+    <None Include="ppapi\Common.h" />
+    <None Include="ppapi\MonoInitialization.h" />
+    <None Include="ppapi\MonoInitialization.c" />
+    <None Include="ppapi\PostMessage.h" />
+    <None Include="ppapi\PostMessage.c" />
+    <None Include="ppapi\URLLoader.h" />
+    <None Include="ppapi\URLLoader.c" />
+    <None Include="ppapi\ppapi.h" />
+    <None Include="ppapi\ppapi.c" />
+    <None Include="ppapi\Reign.Video.OpenGL.c" />
+    <None Include="ppapi\Reign.Video.OpenGL.h" />
+    <None Include="..\..\..\Data\Images\Wolf.dds">
+      <Link>Data\Wolf.dds</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\Data\Images\Roxy.dds">
+      <Link>Data\Roxy.dds</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\Data\Models\boxes.dae">
+      <Link>Data\boxes.dae</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\Data\Models\boxes.rm">
+      <Link>Data\boxes.rm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GLES2_DiffuseTexture.rs">
+      <Link>Data\GLES2_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="Reign.Core">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\NaCl\Lib\Reign.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.OpenGL">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\NaCl\Lib\Reign.Video.OpenGL.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\NaCl\Lib\Reign.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Reign.Video.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\NaCl\Lib\Reign.Video.API.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+</Project>

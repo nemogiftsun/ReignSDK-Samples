@@ -10,7 +10,7 @@ namespace Demo_Windows
 		#elif METRO
 		[MTAThread]
 		#endif
-		static void Main()
+		static void Main(string[] args)// NOTE: NaCl requires args
 		{
 			OS.Run(new MainApp(), 0);
 		}

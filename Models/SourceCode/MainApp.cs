@@ -7,7 +7,7 @@ using ShaderMaterials.Shaders;
 
 namespace Demo_Windows
 {
-	#if WINDOWS || OSX || LINUX
+	#if WINDOWS || OSX || LINUX || NaCl
 	class MainApp : Window
 	#else
 	#if ANDROID
@@ -42,6 +42,8 @@ namespace Demo_Windows
 		: base(ApplicationOrientations.Landscape, false)
 		#elif ANDROID
 		: base(ApplicationOrientations.Landscape, 0, false, null)
+		#elif NaCl
+		: base("Models", 512, 512)
 		#endif
 		{
 			
@@ -59,16 +61,14 @@ namespace Demo_Windows
 				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);
-				#elif OSX || LINUX
-				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
-				#elif iOS || ANDROID
+				#elif OSX || LINUX || iOS || ANDROID || NaCl
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
 				
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
-				var softwareModel = new SoftwareModel("Data/boxes.dae", null, null);
+				//var softwareModel = new SoftwareModel("Data/boxes.dae", null, null);
 				var materialTypes = new Dictionary<string,Type>();
 				materialTypes.Add("Material", typeof(DiffuseTextureMaterial));
 				materialTypes.Add("Material.001", typeof(DiffuseTextureMaterial));
@@ -83,8 +83,8 @@ namespace Demo_Windows
 				if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_ATC) extOverrides.Add(".dds", ".atc");
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
-				var emptyBinders = new List<MaterialFieldBinder>();// XNA on Xbox360 seems to have a bug in (Activator.CreateInstance) if these are null
-				model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
+				var emptyBinders = new List<MaterialFieldBinder>();
+				//model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
 				model2 = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
 
 				var frame = FrameSize;
@@ -164,9 +164,9 @@ namespace Demo_Windows
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;
 			DiffuseTextureMaterial.LightDirection = -camera.Position.Normalize();
 			DiffuseTextureMaterial.LightColor = new Vector4(1);
-			modelOffset = new Vector3();
-			model.Render();
-			modelOffset = new Vector3(3, 0, 0);
+			//modelOffset = new Vector3();
+			//model.Render();
+			//modelOffset = new Vector3(3, 0, 0);
 			model2.Render();
 
 			video.Present();
