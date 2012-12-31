@@ -34,6 +34,8 @@ namespace Demo_Windows
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
+		#elif SILVERLIGHT
+		: base()
 		#elif XNA && !XBOX360
 		: base(512, 512)
 		#elif XBOX360
@@ -48,7 +50,7 @@ namespace Demo_Windows
 		{
 			
 		}
-
+		
 		protected override void shown()
 		{
 			try
@@ -64,7 +66,7 @@ namespace Demo_Windows
 				#elif OSX || LINUX || iOS || ANDROID || NaCl
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
-				
+
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
@@ -76,6 +78,9 @@ namespace Demo_Windows
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
 				var extOverrides = new Dictionary<string,string>();
+				#if SILVERLIGHT
+				extOverrides.Add(".dds", ".png");
+				#endif
 				#if iOS
 				extOverrides.Add(".dds", ".pvr");
 				#endif
@@ -131,7 +136,7 @@ namespace Demo_Windows
 			
 			camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);
 
-			#if XNA
+			#if XNA && !SILVERLIGHT
 			if (Microsoft.Xna.Framework.Input.GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed) Exit();
 			#endif
 		}

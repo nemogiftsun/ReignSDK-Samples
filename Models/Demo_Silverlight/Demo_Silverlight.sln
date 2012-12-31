@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Silverlight", "Demo_Silverlight\Demo_Silverlight.csproj", "{D0AD192D-10D7-479B-B5A2-670F5564CA87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Silverlight.Web", "Demo_Silverlight.Web\Demo_Silverlight.Web.csproj", "{8C384F26-F425-430E-B6D2-A6928034DC63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0AD192D-10D7-479B-B5A2-670F5564CA87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0AD192D-10D7-479B-B5A2-670F5564CA87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0AD192D-10D7-479B-B5A2-670F5564CA87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0AD192D-10D7-479B-B5A2-670F5564CA87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C384F26-F425-430E-B6D2-A6928034DC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C384F26-F425-430E-B6D2-A6928034DC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C384F26-F425-430E-B6D2-A6928034DC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C384F26-F425-430E-B6D2-A6928034DC63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
