@@ -53,10 +53,10 @@ namespace Demo_Windows
 				video = Video.Create(VideoTypes.XNA, out videoType, root, this);
 				#endif
 				
-				FontMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
+				FontMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				
-				fontTexture = Texture2DAPI.New(video, "Data/Font.png", null, null);
-				font = new Font(video, FontMaterial.Shader, fontTexture, "Data/Font.xml", null, null);
+				fontTexture = Texture2DAPI.New(video, "Data/Font.png", null);
+				font = new Font(video, FontMaterial.Shader, fontTexture, "Data/Font.xml", null);
 				
 				var frame = FrameSize;
 				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);

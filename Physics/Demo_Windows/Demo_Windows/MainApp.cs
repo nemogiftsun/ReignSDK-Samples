@@ -81,11 +81,11 @@ namespace Demo
 				#endif
 
 				// shaders
-				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
+				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyDiffuseCallbackMethod;
-				QuickDraw3ColorMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
+				QuickDraw3ColorMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				material = new QuickDraw3ColorMaterial();
-				texture = Texture2DAPI.New(video, "Data/Rocks.dds", null, null);
+				texture = Texture2DAPI.New(video, "Data/Rocks.dds", null);
 				qd = QuickDrawAPI.New(video, QuickDraw3ColorMaterial.BufferLayoutDesc);
 
 				var frame = FrameSize;
@@ -108,10 +108,10 @@ namespace Demo
 
 				var extOverrides = new Dictionary<string,string>();
 				var emptyBinders = new List<MaterialFieldBinder>();
-				sphereModel = new Model(video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				sphereModel = new Model(video, "Data/sphere.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
 				//capsuleModel = Model.Create(videoType, video, "Data/capsule.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides);
-				boxModel = new Model(video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
-				monkeyModel = new Model(video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0);
+				boxModel = new Model(video, "Data/box.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
+				monkeyModel = new Model(video, "Data/monkeyFlat.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
 				
 				// physics
 				collisionSystem = new CollisionSystemPersistentSAP();
@@ -131,7 +131,7 @@ namespace Demo
 				floorBox.IsStatic = true;
 				//floorBox.Orientation = JMatrix.CreateFromYawPitchRoll(0, -.25f, 0);
 				world.AddBody(floorBox);
-				triangleMesh = new TriangleMesh("Data/monkeyFlat.rtmm", loadTiangleMesh, null);
+				triangleMesh = new TriangleMesh("Data/monkeyFlat.rtmm", loadTiangleMesh);
 
 				loaded = true;
 			}
@@ -142,7 +142,7 @@ namespace Demo
 			}
 		}
 		
-		private void loadTiangleMesh(object sender)
+		private void loadTiangleMesh(object sender, bool succeeded)
 		{
 			var mesh = (TriangleMesh)sender;
 

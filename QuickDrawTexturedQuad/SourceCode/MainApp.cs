@@ -72,9 +72,9 @@ namespace Demo
 				video = Video.Init(createVideoTypes, out videoType, root, this, true);
 				#endif
 				
-				QuickDraw3ColorUVMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, qdMaterialLoaded, null);
+				QuickDraw3ColorUVMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, qdMaterialLoaded);
 				material = new QuickDraw3ColorUVMaterial();
-				texture = Texture2DAPI.New(video, "Data/Roxy.dds", null, null);
+				texture = Texture2DAPI.New(video, "Data/Roxy.dds", null);
 
 				var frame = FrameSize;
 				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
@@ -114,7 +114,7 @@ namespace Demo
 			}
 		}
 
-		private void qdMaterialLoaded(object sender)
+		private void qdMaterialLoaded(object sender, bool succeeded)
 		{
 			try
 			{

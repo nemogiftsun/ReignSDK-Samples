@@ -40,7 +40,7 @@ namespace Demo_XNA
 			root = new Core.RootDisposable(Content);
 			AudioTypes audioType;
 			audio = Audio.Init(AudioTypes.XNA | AudioTypes.Dumby, out audioType, root);
-			sound = SoundAPI.New(audio, "Data/Explo2.wav", 1, false, null, null);
+			sound = SoundAPI.New(audio, "Data/Explo2.wav", 1, false, null);
 
 			while (true)
 			{

@@ -24,7 +24,7 @@ namespace Demo_Metro
 			root = new Core.RootDisposable();
 			AudioTypes audioType;
 			audio = Audio.Init(AudioTypes.XAudio | AudioTypes.Dumby, out audioType, root);
-			sound = SoundAPI.New(audio, "Data\\Explo2.wav", 1, false, null, null);
+			sound = SoundAPI.New(audio, "Data\\Explo2.wav", 1, false, null);
 
 			while (true)
 			{

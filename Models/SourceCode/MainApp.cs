@@ -67,7 +67,7 @@ namespace Demo_Windows
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
 
-				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null, null);
+				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
 				//var softwareModel = new SoftwareModel("Data/boxes.dae", null, null);
@@ -89,8 +89,8 @@ namespace Demo_Windows
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
 				var emptyBinders = new List<MaterialFieldBinder>();
-				//model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
-				model2 = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null, null);
+				//model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
+				model2 = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
 
 				var frame = FrameSize;
 				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
