@@ -66,7 +66,7 @@ namespace Demo_Windows
 				#elif OSX || LINUX || iOS || ANDROID || NaCl
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
-
+				
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
@@ -78,7 +78,7 @@ namespace Demo_Windows
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
 				var extOverrides = new Dictionary<string,string>();
-				#if SILVERLIGHT
+				#if SILVERLIGHT || (LINUX && ARM)
 				extOverrides.Add(".dds", ".png");
 				#endif
 				#if iOS
@@ -159,8 +159,8 @@ namespace Demo_Windows
 			video.ClearColorDepth(0, .3f, .3f, 1);
 			rasterizerState.Enable();
 			depthStencilState.Enable();
-			blendState.Enable();
-			samplerState.Enable(0);
+			//blendState.Enable();
+			//samplerState.Enable(0);
 
 			viewPort.Size = FrameSize;
 			viewPort.Apply();
@@ -174,7 +174,7 @@ namespace Demo_Windows
 			//modelOffset = new Vector3(3, 0, 0);
 			model2.Render();
 
-			video.Present();
+			video.Present();Console.WriteLine(time.FPS);
 		}
 	}
 }
