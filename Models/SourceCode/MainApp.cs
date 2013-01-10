@@ -174,7 +174,7 @@ namespace Demo_Windows
 			//modelOffset = new Vector3(3, 0, 0);
 			model2.Render();
 
-			video.Present();Console.WriteLine(time.FPS);
+			video.Present();
 		}
 	}
 }
