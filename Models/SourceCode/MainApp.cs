@@ -58,7 +58,7 @@ namespace Demo_Windows
 				root = new RootDisposable();
 				VideoTypes videoType;
 				#if WINDOWS
-				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);//VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL
+				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);//VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL
 				#elif METRO
 				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
@@ -159,8 +159,8 @@ namespace Demo_Windows
 			video.ClearColorDepth(0, .3f, .3f, 1);
 			rasterizerState.Enable();
 			depthStencilState.Enable();
-			//blendState.Enable();
-			//samplerState.Enable(0);
+			blendState.Enable();
+			samplerState.Enable(0);
 
 			viewPort.Size = FrameSize;
 			viewPort.Apply();

@@ -69,7 +69,7 @@ namespace Demo
 				#if METRO
 				VideoTypes createVideoTypes = VideoTypes.D3D11;
 				#elif WINDOWS
-				VideoTypes createVideoTypes = VideoTypes.D3D11;// | VideoTypes.D3D9 | VideoTypes.OpenGL;
+				VideoTypes createVideoTypes = VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL;
 				#elif XNA
 				VideoTypes createVideoTypes = VideoTypes.XNA;
 				#endif
