@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2B1BC83E-F40A-4B73-B20B-14E013610902}</ProjectGuid>
+    <ProjectTypeGuids>{69878862-DA7D-4DC6-B0A1-50D8FAB4242F};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Demo_Vita</RootNamespace>
+    <AssemblyName>Demo_Vita</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;VITA</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DefineConstants>VITA</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Sce.PlayStation.Core" />
+    <Reference Include="Reign.Core">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Vita\Lib\Reign.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Vita\Lib\Reign.Video.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Vita\Lib\Reign.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.Vita">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Vita\Lib\Reign.Video.Vita.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ShaderProgram Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\Vita_DiffuseTexture.fcg">
+      <Link>Data\Vita_DiffuseTexture.fcg</Link>
+    </ShaderProgram>
+    <ShaderProgram Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\Vita_DiffuseTexture.vcg">
+      <Link>Data\Vita_DiffuseTexture.vcg</Link>
+    </ShaderProgram>
+  </ItemGroup>
+  <ItemGroup>
+    <PsmMetadata Include="app.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="..\..\SourceCode\MainApp.cs">
+      <Link>MainApp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SourceCode\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
+      <Link>DiffuseTexture.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\Data\Images\Roxy.png">
+      <Link>Data\Roxy.png</Link>
+    </Content>
+    <Content Include="..\..\..\Data\Images\Wolf.png">
+      <Link>Data\Wolf.png</Link>
+    </Content>
+    <Content Include="..\..\..\Data\Models\boxes.rm">
+      <Link>Data\boxes.rm</Link>
+    </Content>
+  </ItemGroup>
+</Project>

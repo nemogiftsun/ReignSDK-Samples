@@ -34,7 +34,7 @@ namespace Demo_Windows
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
-		#elif SILVERLIGHT
+		#elif SILVERLIGHT || VITA
 		: base()
 		#elif XNA && !XBOX360
 		: base(512, 512)
@@ -63,7 +63,7 @@ namespace Demo_Windows
 				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);
-				#elif OSX || LINUX || iOS || ANDROID || NaCl
+				#elif OSX || LINUX || iOS || ANDROID || NaCl || VITA
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
 				
@@ -78,7 +78,7 @@ namespace Demo_Windows
 				materialFieldTypes.Add(new MaterialFieldBinder("Material", "Roxy_dds", "Diffuse"));
 				materialFieldTypes.Add(new MaterialFieldBinder("Material.001", "Wolf_dds", "Diffuse"));
 				var extOverrides = new Dictionary<string,string>();
-				#if SILVERLIGHT || (LINUX && ARM)
+				#if SILVERLIGHT || VITA || (LINUX && ARM)
 				extOverrides.Add(".dds", ".png");
 				#endif
 				#if iOS
@@ -88,14 +88,15 @@ namespace Demo_Windows
 				if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_ATC) extOverrides.Add(".dds", ".atc");
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
+				
 				var emptyBinders = new List<MaterialFieldBinder>();
 				//model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
 				model2 = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
-
+				
 				var frame = FrameSize;
 				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
 				camera = new Camera(viewPort, new Vector3(5, 5, 5), new Vector3(), new Vector3(5, 5+1, 5), 1, 50, MathUtilities.DegToRad(45));
-
+				
 				rasterizerState = RasterizerStateAPI.New(video, RasterizerStateDescAPI.New(RasterizerStateTypes.Solid_CullCW));
 				depthStencilState = DepthStencilStateAPI.New(video, DepthStencilStateDescAPI.New(DepthStencilStateTypes.ReadWrite_Less));
 				blendState = BlendStateAPI.New(video, BlendStateDescAPI.New(BlendStateTypes.None));
