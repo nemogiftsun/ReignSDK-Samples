@@ -36,16 +36,16 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Reign.Core">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\LinuxARM\Lib\Reign.Core.dll</HintPath>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\RaspberryPi\Lib\Reign.Core.dll</HintPath>
     </Reference>
     <Reference Include="Reign.Video.API">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\LinuxARM\Lib\Reign.Video.API.dll</HintPath>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\RaspberryPi\Lib\Reign.Video.API.dll</HintPath>
     </Reference>
     <Reference Include="Reign.Video">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\LinuxARM\Lib\Reign.Video.dll</HintPath>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\RaspberryPi\Lib\Reign.Video.dll</HintPath>
     </Reference>
     <Reference Include="Reign.Video.OpenGL">
-      <HintPath>..\..\..\..\ReignSDK\Platforms\LinuxARM\Lib\Reign.Video.OpenGL.dll</HintPath>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\RaspberryPi\Lib\Reign.Video.OpenGL.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

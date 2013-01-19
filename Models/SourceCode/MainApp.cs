@@ -66,7 +66,7 @@ namespace Demo_Windows
 				#elif OSX || LINUX || iOS || ANDROID || NaCl || VITA
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
-				
+				//Console.WriteLine("YAHOOO.....");loaded = true;return;
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
@@ -163,7 +163,7 @@ namespace Demo_Windows
 			blendState.Enable();
 			samplerState.Enable(0);
 
-			viewPort.Size = FrameSize;
+			viewPort.Size = video.BackBufferSize;
 			viewPort.Apply();
 			camera.Apply();
 

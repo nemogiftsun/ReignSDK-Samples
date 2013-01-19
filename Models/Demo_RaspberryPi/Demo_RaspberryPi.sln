@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_LinuxARM", "Demo_LinuxARM\Demo_LinuxARM.csproj", "{2EBF4847-02C4-4EFF-BBDF-742E46DC42EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_RaspberryPi", "Demo_LinuxARM\Demo_RaspberryPi.csproj", "{2EBF4847-02C4-4EFF-BBDF-742E46DC42EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,6 @@ Global
 		{2EBF4847-02C4-4EFF-BBDF-742E46DC42EE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Demo_LinuxARM\Demo_LinuxARM.csproj
+		StartupItem = Demo_LinuxARM\Demo_RaspberryPi.csproj
 	EndGlobalSection
 EndGlobal
