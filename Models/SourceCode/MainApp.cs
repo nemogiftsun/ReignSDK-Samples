@@ -32,7 +32,7 @@ namespace Demo_Windows
 		public MainApp()
 		#if WINDOWS || OSX || LINUX
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
-		#elif METRO
+		#elif METRO || WP8
 		: base(ApplicationOrientations.Landscape)
 		#elif SILVERLIGHT || VITA
 		: base()
@@ -59,14 +59,14 @@ namespace Demo_Windows
 				VideoTypes videoType;
 				#if WINDOWS
 				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);//VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL
-				#elif METRO
+				#elif METRO || WP8
 				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);
 				#elif OSX || LINUX || iOS || ANDROID || NaCl || VITA
 				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
 				#endif
-				//Console.WriteLine("YAHOOO.....");loaded = true;return;
+				
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
@@ -145,7 +145,7 @@ namespace Demo_Windows
 		protected override void render(Time time)
 		{
 			if (!loaded) return;
-
+			
 			video.Update();
 			var e = Loader.UpdateLoad();
 			if (e != null)
