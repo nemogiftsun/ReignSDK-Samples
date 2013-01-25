@@ -8,9 +8,9 @@ using ShaderMaterials.Shaders;
 
 namespace Demo
 {
-	#if WINDOWS || OSX
+	#if WIN32 || OSX
 	class MainApp : Window
-	#elif METRO || XNA
+	#elif WINRT || XNA
 	class MainApp : Application
 	#endif
 	{
@@ -29,7 +29,7 @@ namespace Demo
 		DepthStencilStateI depthStencilState;
 
 		InputI input;
-		#if WINDOWS || METRO || OSX
+		#if WIN32 || WINRT || OSX
 		MouseI mouse;
 		KeyboardI keyboard;
 		#elif XNA
@@ -37,9 +37,9 @@ namespace Demo
 		#endif
 		
 		public MainApp()
-		#if WINDOWS || OSX
+		#if WIN32 || OSX
 		: base("QuickDraw Sample", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
-		#elif METRO
+		#elif WINRT
 		: base(ApplicationOrientations.Landscape)
 		#elif XNA
 		: base(512, 512)
@@ -56,9 +56,9 @@ namespace Demo
 
 				// video objects
 				VideoTypes videoType;
-				#if METRO
+				#if WINRT
 				VideoTypes createVideoTypes = VideoTypes.D3D11;
-				#elif WINDOWS
+				#elif WIN32
 				VideoTypes createVideoTypes = VideoTypes.D3D11;// | VideoTypes.D3D9 | VideoTypes.OpenGL;
 				#elif XNA
 				VideoTypes createVideoTypes = VideoTypes.XNA;
@@ -66,7 +66,7 @@ namespace Demo
 				VideoTypes createVideoTypes = VideoTypes.OpenGL;
 				#endif
 
-				#if WINDOWS || METRO || OSX
+				#if WIN32 || WINRT || OSX
 				video = Video.Init(createVideoTypes, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Init(createVideoTypes, out videoType, root, this, true);
@@ -88,9 +88,9 @@ namespace Demo
 
 				// input
 				InputTypes inputType;
-				#if METRO
-				InputTypes createInputTypes = InputTypes.Metro;
-				#elif WINDOWS
+				#if WINRT
+				InputTypes createInputTypes = InputTypes.WinRT;
+				#elif WIN32
 				InputTypes createInputTypes = InputTypes.WinForms;
 				#elif XNA
 				InputTypes createInputTypes = InputTypes.XNA;
@@ -98,7 +98,7 @@ namespace Demo
 				InputTypes createInputTypes = InputTypes.Cocoa;
 				#endif
 				input = Input.Init(createInputTypes, out inputType, root, this);
-				#if WINDOWS || METRO || OSX
+				#if WIN32 || WINRT || OSX
 				mouse = MouseAPI.New(input);
 				keyboard = KeyboardAPI.New(input);
 				#elif XNA
@@ -146,7 +146,7 @@ namespace Demo
 		{
 			if (!loaded) return;
 
-			#if WINDOWS || METRO || OSX
+			#if WIN32 || WINRT || OSX
 			if (keyboard.ArrowUp.On) camera.Zoom(1 * time.Delta, 1);
 			if (keyboard.ArrowDown.On) camera.Zoom(-1 * time.Delta, 1);
 			if (!mouse.Left.On) camera.RotateAroundLookLocationWorld(0, 1 * time.Delta, 0);

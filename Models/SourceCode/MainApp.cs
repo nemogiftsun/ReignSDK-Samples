@@ -5,9 +5,9 @@ using Reign.Video;
 using Reign.Video.API;
 using ShaderMaterials.Shaders;
 
-namespace Demo_Windows
+namespace Demo
 {
-	#if WINDOWS || OSX || LINUX || NaCl
+	#if WIN32 || OSX || LINUX || NaCl
 	class MainApp : Window
 	#else
 	#if ANDROID
@@ -30,9 +30,9 @@ namespace Demo_Windows
 		SamplerStateI samplerState;
 
 		public MainApp()
-		#if WINDOWS || OSX || LINUX
+		#if WIN32 || OSX || LINUX
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
-		#elif METRO || WP8
+		#elif WINRT || WP8
 		: base(ApplicationOrientations.Landscape)
 		#elif SILVERLIGHT || VITA
 		: base()
@@ -57,9 +57,9 @@ namespace Demo_Windows
 			{
 				root = new RootDisposable();
 				VideoTypes videoType;
-				#if WINDOWS
-				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);//VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL
-				#elif METRO || WP8
+				#if WIN32
+				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
+				#elif WINRT || WP8
 				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
 				#elif XNA
 				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);

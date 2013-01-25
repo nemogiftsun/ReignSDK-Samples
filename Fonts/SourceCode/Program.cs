@@ -1,7 +1,7 @@
 ﻿using System;
 using Reign.Core;
 
-namespace Demo_Windows
+namespace Demo
 {
 	static class Program
 	{

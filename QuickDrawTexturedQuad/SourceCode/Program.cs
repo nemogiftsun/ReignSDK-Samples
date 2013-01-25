@@ -5,9 +5,9 @@ namespace Demo
 {
 	static class Program
 	{
-		#if WINDOWS
+		#if WIN32
 		[STAThread]
-		#elif METRO
+		#elif WINRT
 		[MTAThread]
 		#endif
 		static void Main()

@@ -5,9 +5,9 @@ using Reign.Video;
 using Reign.Video.API;
 using ShaderMaterials.Shaders;
 
-namespace Demo_Windows
+namespace Demo
 {
-	#if WINDOWS
+	#if WIN32
 	class MainApp : Window
 	#else
 	class MainApp : Application
@@ -28,7 +28,7 @@ namespace Demo_Windows
 		BlendStateI blendState;
 
 		public MainApp()
-		#if WINDOWS
+		#if WIN32
 		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.FrameSizable)
 		#elif METRO
 		: base(ApplicationOrientations.Landscape)
@@ -45,7 +45,7 @@ namespace Demo_Windows
 			{
 				root = new RootDisposable();
 				VideoTypes videoType;
-				#if WINDOWS
+				#if WIN32
 				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
 				#elif METRO
 				video = Video.Create(VideoTypes.D3D11, out videoType, root, this, true);

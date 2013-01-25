@@ -1,5 +1,5 @@
-﻿using Reign.Core;
-using System;
+﻿using System;
+using Reign.Core;
 
 namespace Demo
 {
@@ -7,10 +7,10 @@ namespace Demo
 	{
 		#if WIN32
 		[STAThread]
-		#elif WINRT
+		#elif METRO
 		[MTAThread]
 		#endif
-		static void Main(string[] args)// NOTE: NaCl requires args
+		static void Main()
 		{
 			OS.Run(new MainApp(), 0);
 		}
