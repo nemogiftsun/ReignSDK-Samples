@@ -7,13 +7,21 @@ using ShaderMaterials.Shaders;
 
 namespace Demo
 {
-	#if WIN32 || OSX || LINUX || NaCl
-	class MainApp : Window
-	#else
-	#if ANDROID
+	#if WIN32
+	public class MainApp : WinFormApplication
+	#elif WINRT
+	public class MainApp : CoreWindowApplication
+	#elif WP8
+	public class MainApp : XAMLApplication
+	#elif SILVERLIGHT
+	public class MainApp : SilverlightApplication
+	#elif XNA
+	public class MainApp : XNAApplication
+	#elif VITA
+	public class MainApp : VitaApplication
+	#elif ANDROID
 	[Android.App.Activity (MainLauncher = true)]
-	#endif
-	public class MainApp : Application
+	public class MainApp : WinFormApplication
 	#endif
 	{
 		bool loaded;
@@ -21,7 +29,7 @@ namespace Demo
 		VideoI video;
 		ViewPortI viewPort;
 		Camera camera;
-		Model model, model2;
+		Model model;
 		Vector3 modelOffset;
 
 		RasterizerStateI rasterizerState;
@@ -30,47 +38,25 @@ namespace Demo
 		SamplerStateI samplerState;
 
 		public MainApp()
-		#if WIN32 || OSX || LINUX
-		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.Frame)
-		#elif WINRT || WP8
-		: base(ApplicationOrientations.Landscape)
-		#elif SILVERLIGHT || VITA
-		: base()
-		#elif XNA && !XBOX360
-		: base(512, 512)
-		#elif XBOX360
-		: base(0, 0)
-		#elif iOS
-		: base(ApplicationOrientations.Landscape, false)
-		#elif ANDROID
-		: base(ApplicationOrientations.Landscape, 0, false, null)
-		#elif NaCl
-		: base("Models", 512, 512)
-		#endif
 		{
-			
+			var desc = new ApplicationDesc()
+			{
+				Type = ApplicationTypes.FrameSizable
+			};
+			Init(desc);
 		}
 		
-		protected override void shown()
+		public override void Shown()
 		{
 			try
 			{
 				root = new RootDisposable();
 				VideoTypes videoType;
-				#if WIN32
-				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL, out videoType, root, this, true);
-				#elif WINRT || WP8
-				video = Video.Init(VideoTypes.D3D11, out videoType, root, this, true);
-				#elif XNA
-				video = Video.Init(VideoTypes.XNA, out videoType, root, this, true);
-				#elif OSX || LINUX || iOS || ANDROID || NaCl || VITA
-				video = Video.Init(VideoTypes.OpenGL, out videoType, root, this, true);
-				#endif
+				video = Video.Init(VideoTypes.D3D11 | VideoTypes.D3D9 | VideoTypes.OpenGL | VideoTypes.XNA | VideoTypes.Vita, out videoType, root, this, true);
 				
 				DiffuseTextureMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				DiffuseTextureMaterial.ApplyInstanceConstantsCallback = applyInstanceData;
 				
-				//var softwareModel = new SoftwareModel("Data/boxes.dae", null, null);
 				var materialTypes = new Dictionary<string,Type>();
 				materialTypes.Add("Material", typeof(DiffuseTextureMaterial));
 				materialTypes.Add("Material.001", typeof(DiffuseTextureMaterial));
@@ -88,10 +74,8 @@ namespace Demo
 				if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_ATC) extOverrides.Add(".dds", ".atc");
 				else if (((Reign.Video.OpenGL.Video)video).Caps.TextureCompression_PVR) extOverrides.Add(".dds", ".pvr");
 				#endif
-				
 				var emptyBinders = new List<MaterialFieldBinder>();
-				//model = new Model(video, softwareModel, MeshVertexSizes.Float3, false, true, true, "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
-				model2 = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
+				model = new Model(video, "Data/boxes.rm", "Data/", materialTypes, emptyBinders, emptyBinders, emptyBinders, emptyBinders, materialFieldTypes, extOverrides, 0, null);
 				
 				var frame = FrameSize;
 				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
@@ -121,7 +105,7 @@ namespace Demo
 			}
 		}
 
-		protected override void closing()
+		public override void Closing()
 		{
 			dispose();
 		}
@@ -131,7 +115,7 @@ namespace Demo
 			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Position + modelOffset);
 		}
 
-		protected override void update(Time time)
+		public override void Update(Time time)
 		{
 			if (!loaded) return;
 			
@@ -142,7 +126,7 @@ namespace Demo
 			#endif
 		}
 
-		protected override void render(Time time)
+		public override void Render(Time time)
 		{
 			if (!loaded) return;
 			
@@ -170,10 +154,7 @@ namespace Demo
 			DiffuseTextureMaterial.Camera = camera.TransformMatrix;
 			DiffuseTextureMaterial.LightDirection = -camera.Position.Normalize();
 			DiffuseTextureMaterial.LightColor = new Vector4(1);
-			//modelOffset = new Vector3();
-			//model.Render();
-			//modelOffset = new Vector3(3, 0, 0);
-			model2.Render();
+			model.Render();
 
 			video.Present();
 		}

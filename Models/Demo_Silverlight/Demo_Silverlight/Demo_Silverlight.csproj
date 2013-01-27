@@ -21,7 +21,7 @@
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>Demo_Silverlight.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>Demo_Windows.MainApp</SilverlightAppEntry>
+    <SilverlightAppEntry>Demo.MainApp</SilverlightAppEntry>
     <TestPageFileName>Demo_SilverlightTestPage.html</TestPageFileName>
     <CreateTestPage>true</CreateTestPage>
     <ValidateXaml>true</ValidateXaml>
