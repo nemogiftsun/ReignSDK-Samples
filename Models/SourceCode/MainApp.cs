@@ -26,6 +26,8 @@ namespace Demo
 	public class MainApp : AndroidApplication
 	#elif NaCl
 	public class MainApp : NaClApplication
+	#elif LINUX
+	public class MainApp : X11Application
 	#endif
 	{
 		bool loaded;
