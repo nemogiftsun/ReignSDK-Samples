@@ -19,11 +19,11 @@ namespace Demo
 	public class MainApp : XNAApplication
 	#elif VITA
 	public class MainApp : VitaApplication
-	#elif OSX
+	#elif OSX || iOS
 	public class MainApp : CocoaApplication
 	#elif ANDROID
 	[Android.App.Activity (MainLauncher = true)]
-	public class MainApp : WinFormApplication
+	public class MainApp : AndroidApplication
 	#endif
 	{
 		bool loaded;
