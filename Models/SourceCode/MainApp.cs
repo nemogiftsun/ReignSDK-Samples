@@ -24,6 +24,8 @@ namespace Demo
 	#elif ANDROID
 	[Android.App.Activity (MainLauncher = true)]
 	public class MainApp : AndroidApplication
+	#elif NaCl
+	public class MainApp : NaClApplication
 	#endif
 	{
 		bool loaded;
