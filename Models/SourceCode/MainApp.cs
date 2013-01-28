@@ -19,6 +19,8 @@ namespace Demo
 	public class MainApp : XNAApplication
 	#elif VITA
 	public class MainApp : VitaApplication
+	#elif OSX
+	public class MainApp : CocoaApplication
 	#elif ANDROID
 	[Android.App.Activity (MainLauncher = true)]
 	public class MainApp : WinFormApplication
@@ -30,7 +32,6 @@ namespace Demo
 		ViewPortI viewPort;
 		Camera camera;
 		Model model;
-		Vector3 modelOffset;
 
 		RasterizerStateI rasterizerState;
 		DepthStencilStateI depthStencilState;
@@ -112,7 +113,7 @@ namespace Demo
 
 		private void applyInstanceData(DiffuseTextureMaterial material, Mesh mesh)
 		{
-			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Position + modelOffset);
+			material.Transform = Matrix4.FromAffineTransform(Matrix3.FromEuler(mesh.Rotation), mesh.Scale, mesh.Position);
 		}
 
 		public override void Update(Time time)
