@@ -1,3 +1,6 @@
+NOTE: This repo is old, outdated and no longer is in tune with the ReignSDK.
+It will deleted and replaced with a new version at a later date.
+
 ReignSDK-Samples
 ================
 
