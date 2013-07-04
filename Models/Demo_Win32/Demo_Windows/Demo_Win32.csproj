@@ -38,6 +38,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\Reign.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Reign.Input">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\Reign.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.API">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\Reign.Input.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.WinForms">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\Reign.Input.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.UI">
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\Reign.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Reign.Video, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\Reign.Video.dll</HintPath>
@@ -81,6 +93,21 @@
     <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
       <Link>DiffuseTexture.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\Font.cs">
+      <Link>Font.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\UISolidColor.cs">
+      <Link>UISolidColor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\UISolidTexture.cs">
+      <Link>UISolidTexture.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\UISolidTexture2.cs">
+      <Link>UISolidTexture2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\UISolidTexture3.cs">
+      <Link>UISolidTexture3.cs</Link>
+    </Compile>
     <Compile Include="..\..\SourceCode\MainApp.cs">
       <Link>MainApp.cs</Link>
       <SubType>Form</SubType>
@@ -89,6 +116,18 @@
       <Link>Program.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="..\..\..\Data\UI\PlayIdle.png">
+      <Link>Data\PlayIdle.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\UI\PlayPressed.png">
+      <Link>Data\PlayPressed.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\UI\PlayRollover.png">
+      <Link>Data\PlayRollover.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -99,6 +138,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="..\..\..\Data\Fonts\WhiteFont.png">
+      <Link>Data\WhiteFont.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\Data\Images\Roxy.dds">
       <Link>Data\Roxy.dds</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -129,6 +172,90 @@
     </Content>
     <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GL3_DiffuseTexture.rs">
       <Link>Data\GL3_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D11_UISolidColor.rs">
+      <Link>Data\D3D11_UISolidColor.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D9_UISolidColor.rs">
+      <Link>Data\D3D9_UISolidColor.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL2_UISolidColor.rs">
+      <Link>Data\GL2_UISolidColor.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL3_UISolidColor.rs">
+      <Link>Data\GL3_UISolidColor.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\D3D11_Font.rs">
+      <Link>Data\D3D11_Font.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\D3D9_Font.rs">
+      <Link>Data\D3D9_Font.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\GL2_Font.rs">
+      <Link>Data\GL2_Font.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Font\GL3_Font.rs">
+      <Link>Data\GL3_Font.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Data\Fonts\WhiteFont.font">
+      <Link>Data\WhiteFont.font</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D11_UISolidTexture.rs">
+      <Link>Data\D3D11_UISolidTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D9_UISolidTexture.rs">
+      <Link>Data\D3D9_UISolidTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL2_UISolidTexture.rs">
+      <Link>Data\GL2_UISolidTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL3_UISolidTexture.rs">
+      <Link>Data\GL3_UISolidTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D11_UISolidTexture2.rs">
+      <Link>Data\D3D11_UISolidTexture2.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D11_UISolidTexture3.rs">
+      <Link>Data\D3D11_UISolidTexture3.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D9_UISolidTexture2.rs">
+      <Link>Data\D3D9_UISolidTexture2.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\D3D9_UISolidTexture3.rs">
+      <Link>Data\D3D9_UISolidTexture3.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL2_UISolidTexture2.rs">
+      <Link>Data\GL2_UISolidTexture2.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL2_UISolidTexture3.rs">
+      <Link>Data\GL2_UISolidTexture3.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL3_UISolidTexture2.rs">
+      <Link>Data\GL3_UISolidTexture2.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\UI\GL3_UISolidTexture3.rs">
+      <Link>Data\GL3_UISolidTexture3.rs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">

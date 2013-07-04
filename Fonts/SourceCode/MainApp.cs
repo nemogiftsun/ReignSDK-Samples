@@ -7,11 +7,7 @@ using ShaderMaterials.Shaders;
 
 namespace Demo
 {
-	#if WIN32
-	class MainApp : Window
-	#else
-	class MainApp : Application
-	#endif
+	class MainApp : WinFormApplication
 	{
 		bool loaded;
 		RootDisposable root;
@@ -28,18 +24,15 @@ namespace Demo
 		BlendStateI blendState;
 
 		public MainApp()
-		#if WIN32
-		: base("Models", 512, 512, WindowStartPositions.CenterCurrentScreen, WindowTypes.FrameSizable)
-		#elif METRO
-		: base(ApplicationOrientations.Landscape)
-		#elif XNA
-		: base(512, 512)
-		#endif
 		{
-			
+			var desc = new ApplicationDesc()
+			{
+				Name = "Fons"
+			};
+			Init(desc);
 		}
 
-		protected override void shown()
+		public override void Shown()
 		{
 			try
 			{
@@ -56,7 +49,7 @@ namespace Demo
 				FontMaterial.Init(video, "Data/", video.FileTag, ShaderVersions.Max, null);
 				
 				fontTexture = Texture2DAPI.New(video, "Data/Font.png", null);
-				font = new Font(video, FontMaterial.Shader, fontTexture, "Data/Font.xml", null);
+				font = new Font(video, FontMaterial.Shader, fontTexture, "Data/Font.font", null);
 				
 				var frame = FrameSize;
 				viewPort = ViewPortAPI.New(video, 0, 0, frame.Width, frame.Height);
@@ -86,13 +79,13 @@ namespace Demo
 			}
 		}
 
-		protected override void closing()
+		public override void Closing()
 		{
 			dispose();
 		}
 
 		Time uTime;
-		protected override void update(Time time)
+		public override void Update(Time time)
 		{
 			if (!loaded) return;
 			
@@ -100,7 +93,7 @@ namespace Demo
 			camera.RotateAroundLookLocationWorld(new Reign.Core.Vector3(.25f, .5f, .75f) * time.Delta);
 		}
 
-		protected override void render(Time time)
+		public override void Render(Time time)
 		{
 			if (!loaded) return;
 

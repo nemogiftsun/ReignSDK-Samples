@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8CE2559A-4C81-41C9-B20D-4A31582A07E2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MainDemo_Win32</RootNamespace>
+    <AssemblyName>MainDemo_Win32</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WIN32</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WIN32</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Reign.Audio, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Audio.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Audio.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Audio.Dumby, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Audio.Dumby.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Audio.XAudio, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Audio.XAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Input.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Input.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Input.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Video.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.D3D11, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Video.D3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.D3D9, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Video.D3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.Video.OpenGL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign.Video.OpenGL.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign_Audio_XAudio_Component, Version=1.0.4850.27237, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign_Audio_XAudio_Component.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign_Video_D3D11_Component, Version=1.0.4850.27251, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign_Video_D3D11_Component.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign_Video_D3D9_Component, Version=1.0.4850.33635, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReignSDK\Platforms\Win32\Lib\x86\Debug\Reign_Video_D3D9_Component.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseSolidColor.cs">
+      <Link>DiffuseSolidColor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\DiffuseTexture.cs">
+      <Link>DiffuseTexture.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\QuickDraw3Color.cs">
+      <Link>QuickDraw3Color.cs</Link>
+    </Compile>
+    <Compile Include="MainApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Content Include="..\..\..\..\Roxy.png">
+      <Link>Data\Roxy.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\D3D11_DiffuseSolidColor.rs">
+      <Link>Data\D3D11_DiffuseSolidColor.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\D3D11_DiffuseTexture.rs">
+      <Link>Data\D3D11_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\D3D9_DiffuseTexture.rs">
+      <Link>Data\D3D9_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GL2_DiffuseTexture.rs">
+      <Link>Data\GL2_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\Diffuse\GL3_DiffuseTexture.rs">
+      <Link>Data\GL3_DiffuseTexture.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\untitled2.rm">
+      <Link>Data\untitled2.rm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\D3D11_QuickDraw3Color.rs">
+      <Link>Data\D3D11_QuickDraw3Color.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\untitled.rm">
+      <Link>Data\untitled.rm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\D3D9_QuickDraw3Color.rs">
+      <Link>Data\D3D9_QuickDraw3Color.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\GL2_QuickDraw3Color.rs">
+      <Link>Data\GL2_QuickDraw3Color.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\ReignSDK\Shaders\Compiled\QuickDraw\GL3_QuickDraw3Color.rs">
+      <Link>Data\GL3_QuickDraw3Color.rs</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
